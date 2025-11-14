@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: portal-html
+  namespace: portal
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Cluster Portal</title>
+      <style>
+        body { font-family: sans-serif; margin: 40px; }
+        h1 { margin-bottom: 8px; }
+        ul { line-height: 1.8; }
+        a { text-decoration: none; }
+      </style>
+    </head>
+    <body>
+      <h1>Cluster Portal</h1>
+      <p>자주 쓰는 서비스 링크 모음</p>
+      <ul>
+        <li><a href="https://argocd.example.com" target="_blank">Argo CD</a></li>
+        <li><a href="https://grafana.example.com" target="_blank">Grafana</a></li>
+        <li><a href="https://kibana.example.com" target="_blank">Kibana</a></li>
+      </ul>
+    </body>
+    </html>

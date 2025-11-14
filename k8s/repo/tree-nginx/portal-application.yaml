@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: portal-nginx
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: 'https://github.com/son/your-repo.git'  # 👉 본인 Git URL
+    targetRevision: main                             # main / master / tag 등
+    path: portal                                     # 위에서 만든 폴더 경로
+
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: portal
+
+  syncPolicy:
+    automated:
+      prune: true         # Git에서 지운 리소스는 클러스터에서도 삭제
+      selfHeal: true      # 수동 변경되면 Git 상태로 되돌림
+    syncOptions:
+      - CreateNamespace=true
