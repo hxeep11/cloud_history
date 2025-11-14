@@ -4,11 +4,12 @@ metadata:
   name: portal-nginx
   namespace: portal
 spec:
-  type: LoadBalancer   # 필요에 따라 NodePort / ClusterIP
+  type: NodePort
   selector:
     app: portal-nginx
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
+      nodePort: 30081      # 예시 값 (LB에서 쓸 NodePort)
       protocol: TCP
-      name: http
