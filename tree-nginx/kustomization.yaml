@@ -3,10 +3,6 @@ kind: Kustomization
 
 namespace: portal
 
-resources:
-  - values-portal-nginx.yaml
-  # (기존에 쓰던 다른 yaml들)
-
 configMapGenerator:
   - name: portal-nginx-index
     files:
