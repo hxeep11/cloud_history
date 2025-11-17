@@ -4,8 +4,7 @@ kind: Kustomization
 namespace: portal
 
 resources:
-  - deployment-nginx.yaml
-  - service-nginx.yaml
+  - values-portal-nginx.yaml
   # (기존에 쓰던 다른 yaml들)
 
 configMapGenerator:
