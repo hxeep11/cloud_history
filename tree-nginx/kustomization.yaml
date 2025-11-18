@@ -1,21 +1,22 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# 1) 여기에는 실제 portal-nginx Deployment가 포함된 리소스를 넣어야 함
-#    - 만약 Helm 템플릿 결과를 파일로 저장해두었다면 그 파일 이름
-#    - 지금 당장은 테스트용으로 live 백업을 그대로 써도 됨 (metadata는 나중에 정리)
+# ArgoCD에서 Helm을 같이 쓰는 경우, 보통 여기에는 Helm 렌더 결과가 들어옵니다.
+# 이미 무언가 적혀 있으면 그건 유지하세요.
 resources:
-  - portal-nginx.deploy.live.yaml.bak   # 일단 이걸로 테스트
+  # 필요하면 기존 리소스 선언 유지
+  # - some-base.yaml
 
-# 2) index.html을 ConfigMap으로 생성
 configMapGenerator:
   - name: portal-nginx-index
     files:
-      - index.html=./html/index.html
+      - index.html=./html/index.html   # html 폴더의 index.html 사용
 
 generatorOptions:
-  disableNameSuffixHash: true
+  disableNameSuffixHash: true          # ConfigMap 이름에 해시 안 붙게
 
-# 3) Strategic Merge Patch 방식으로 Deployment에 볼륨/마운트 추가
-patchesStrategicMerge:
-  - portal-nginx-deploy-patch.yaml
+patches:
+  - path: portal-nginx-deploy-patch.yaml
+    target:
+      kind: Deployment
+      name: portal-nginx               # 실제 Deployment 이름
