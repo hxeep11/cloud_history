@@ -1,18 +1,22 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: portal
+# ArgoCD에서 Helm을 같이 쓰는 경우, 보통 여기에는 Helm 렌더 결과가 들어옵니다.
+# 이미 무언가 적혀 있으면 그건 유지하세요.
+resources:
+  # 필요하면 기존 리소스 선언 유지
+  # - some-base.yaml
 
 configMapGenerator:
   - name: portal-nginx-index
     files:
-      - index.html=html/index.html
+      - index.html=./html/index.html   # html 폴더의 index.html 사용
 
 generatorOptions:
-  disableNameSuffixHash: true   # 이름 뒤에 해시 안 붙게 (portal-nginx-index 그대로 사용)
+  disableNameSuffixHash: true          # ConfigMap 이름에 해시 안 붙게
 
 patches:
-  - path: portal-nginx.index.patch.yaml   # 파일이 같은 디렉토리에 있을 때
+  - path: portal-nginx.deploy.patch.yaml
     target:
       kind: Deployment
-      name: portal-nginx                  # 실제 Deployment 이름
+      name: portal-nginx               # 실제 Deployment 이름
