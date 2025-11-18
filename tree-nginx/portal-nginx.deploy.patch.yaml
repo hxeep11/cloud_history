@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-nginx         # 실제 Deployment 이름과 동일
+  namespace: portal     # 필요하면 명시
+spec:
+  template:
+    spec:
+      volumes:
+        - name: portal-nginx-index-volume
+          configMap:
+            name: portal-nginx-index    # 위에서 만든 ConfigMap 이름
+      containers:
+        - name: portal-nginx  # 예: nginx, portal-nginx 등 실제 이름
+          volumeMounts:
+            - name: portal-nginx-index-volume
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html

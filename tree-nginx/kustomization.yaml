@@ -7,3 +7,9 @@ configMapGenerator:
   - name: portal-nginx-index
     files:
       - index.html=html/index.html
+
+generatorOptions:
+  disableNameSuffixHash: true   # 이름 뒤에 해시 안 붙게 (portal-nginx-index 그대로 사용)
+
+patchesStrategicMerge:
+  - portal-nginx-index-patch.yaml

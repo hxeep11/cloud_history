@@ -1,0 +1,12 @@
+USER-SUPPLIED VALUES:
+service:
+  nodePorts:
+    http: 30080
+    https: ""
+  ports:
+    http: 80
+    https: 443
+  targetPort:
+    http: http
+    https: https
+  type: NodePort
