@@ -11,5 +11,8 @@ configMapGenerator:
 generatorOptions:
   disableNameSuffixHash: true   # 이름 뒤에 해시 안 붙게 (portal-nginx-index 그대로 사용)
 
-patchesStrategicMerge:
-  - portal-nginx-index-patch.yaml
+patches:
+  - path: portal-nginx.index.patch.yaml   # 파일이 같은 디렉토리에 있을 때
+    target:
+      kind: Deployment
+      name: portal-nginx                  # 실제 Deployment 이름
