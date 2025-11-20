@@ -1,25 +1,10 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nginx
-  name: nginx
-  namespace: nginx
+  name: nginx-service
 spec:
-  replicas: 1
+  type: NodePort
   selector:
-    matchLabels:
-      app: nginx
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - image: nginx:latest
-        name: nginx
-        resources: {}
-status: {}
+    app: nginx
+  ports:
+  - port: 30080
