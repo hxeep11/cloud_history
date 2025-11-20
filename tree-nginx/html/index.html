@@ -137,125 +137,6 @@
       box-shadow: 0 0 16px rgba(37, 99, 235, 0.7);
     }
 
-    /* 로그인 / 회원가입 영역 */
-    .auth-box {
-      margin-top: 8px;
-      padding: 12px 10px;
-      border-radius: 14px;
-      background: radial-gradient(circle at top left, #0ea5e9 0, #020617 55%);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
-    }
-
-    .auth-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .auth-sub {
-      font-size: 11px;
-      color: rgba(226, 232, 240, 0.8);
-      margin-bottom: 10px;
-    }
-
-    .auth-row {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .auth-label {
-      font-size: 11px;
-      color: #e2e8f0;
-    }
-
-    .auth-input {
-      width: 100%;
-      border-radius: 9px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 7px 8px;
-      font-size: 12px;
-      background: rgba(15, 23, 42, 0.6);
-      color: #e5e7eb;
-      outline: none;
-      transition: border 0.15s ease, box-shadow 0.15s ease,
-        background 0.15s ease;
-    }
-
-    .auth-input::placeholder {
-      color: rgba(148, 163, 184, 0.9);
-    }
-
-    .auth-input:focus {
-      border-color: var(--accent);
-      background: rgba(15, 23, 42, 0.9);
-      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
-    }
-
-    .auth-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .btn {
-      flex: 1;
-      padding: 7px 8px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.15s ease,
-        background 0.15s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .btn-login {
-      background: #0f172a;
-      color: #e5e7eb;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-    }
-
-    .btn-signup {
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9, #6366f1);
-      color: white;
-      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.6);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.8);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    .auth-meta {
-      margin-top: 6px;
-      font-size: 11px;
-      color: rgba(226, 232, 240, 0.9);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .auth-link {
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
     /* 메인 영역 */
     .main {
       flex: 1;
@@ -432,12 +313,6 @@
       font-weight: 600;
     }
 
-    .link-url {
-      font-size: 12px;
-      color: #a5b4fc;
-      word-break: break-all;
-    }
-
     .link-desc {
       font-size: 12px;
       color: var(--text-muted);
@@ -447,10 +322,11 @@
     .link-footer {
       margin-top: 8px;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       font-size: 11px;
       color: var(--text-muted);
+      gap: 8px;
     }
 
     .link-btn {
@@ -481,11 +357,154 @@
       border-color: #22c55e;
       box-shadow: 0 26px 80px rgba(34, 197, 94, 0.35);
     }
+
+    /* 금 시세 섹션 */
+    .gold-section {
+      margin-top: 26px;
+    }
+
+    .gold-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .gold-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .gold-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .gold-card {
+      border-radius: 20px;
+      padding: 18px 20px;
+      background: radial-gradient(circle at top, #020617 0, #020617 65%);
+      border: 1px solid rgba(250, 204, 21, 0.6);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gold-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(
+        circle at top left,
+        rgba(250, 204, 21, 0.28),
+        transparent 60%
+      );
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .gold-card-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .gold-main {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .gold-label {
+      font-size: 12px;
+      color: rgba(250, 250, 250, 0.85);
+    }
+
+    .gold-price {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .gold-unit {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .gold-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .gold-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(22, 163, 74, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+    }
+
+    .gold-change.down {
+      background: rgba(220, 38, 38, 0.18);
+      border-color: rgba(248, 113, 113, 0.9);
+    }
+
+    .gold-refresh-info {
+      font-size: 10px;
+      opacity: 0.8;
+    }
+
+    .gold-refresh-btn {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid rgba(250, 250, 250, 0.7);
+      background: rgba(15, 23, 42, 0.85);
+      color: #f9fafb;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, transform 0.12s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .gold-refresh-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    .gold-refresh-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+      .gold-card-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="layout">
-    <!-- 사이드바 -->
+    <!-- 사이드바 (로그인 없음) -->
     <aside class="sidebar">
       <div class="logo-area">
         <div class="logo-badge">P</div>
@@ -522,55 +541,6 @@
           <span style="font-size:11px; color:var(--text-muted)">Settings</span>
         </div>
       </div>
-
-      <!-- 로그인 / 회원가입 -->
-      <div class="auth-box">
-        <div class="auth-title">
-          <span>로그인</span>
-          <span style="font-size:10px; opacity:0.8;">ID / PW</span>
-        </div>
-        <div class="auth-sub">
-          개인 포털에 접속하려면 계정을 입력하세요.
-        </div>
-
-        <form id="authForm">
-          <div class="auth-row">
-            <label class="auth-label" for="userId">아이디</label>
-            <input
-              type="text"
-              id="userId"
-              class="auth-input"
-              placeholder="example"
-              autocomplete="username"
-            />
-          </div>
-
-          <div class="auth-row">
-            <label class="auth-label" for="userPw">비밀번호</label>
-            <input
-              type="password"
-              id="userPw"
-              class="auth-input"
-              placeholder="●●●●●●●●"
-              autocomplete="current-password"
-            />
-          </div>
-
-          <div class="auth-actions">
-            <button type="submit" class="btn btn-login">
-              로그인
-            </button>
-            <button type="button" class="btn btn-signup" id="signupBtn">
-              회원가입
-            </button>
-          </div>
-        </form>
-
-        <div class="auth-meta">
-          <span style="opacity:0.8;">자동 로그인</span>
-          <span class="auth-link" id="forgotPw">비밀번호 찾기</span>
-        </div>
-      </div>
     </aside>
 
     <!-- 메인 -->
@@ -580,7 +550,7 @@
           <div class="main-title-group">
             <div class="main-title">내 서비스 포털</div>
             <div class="main-subtitle">
-              자주 사용하는 툴과 서비스를 한 화면에서 빠르게 접근할 수 있도록 정리한 공간입니다.
+              자주 사용하는 툴과 서비스를 한 화면에서 빠르게 접근할 수 있도록 정리한 개인 포털입니다.
             </div>
           </div>
           <div class="pill">
@@ -589,7 +559,7 @@
           </div>
         </header>
 
-        <!-- 링크 카드 그리드 -->
+        <!-- 링크 카드 그리드 (URL/포트 표시는 숨김) -->
         <section class="cards-grid">
           <!-- 카드 1 -->
           <article class="link-card" data-url="http://hxeep.kro.kr:32080">
@@ -602,13 +572,11 @@
                 기본 포털
               </span>
             </div>
-            <div class="link-title">포털 / 대시보드 (32080)</div>
-            <div class="link-url">http://hxeep.kro.kr:32080</div>
+            <div class="link-title">메인 포털</div>
             <div class="link-desc">
-              메인 웹 포털 혹은 인덱스 페이지로 사용하기 좋은 기본 진입점입니다.
+              가장 자주 들어가는 기본 진입점으로 설정한 서비스입니다.
             </div>
             <div class="link-footer">
-              <span>HTTP 서비스 · NodePort 32080</span>
               <button class="link-btn">
                 열기
                 <span>↗</span>
@@ -624,16 +592,14 @@
                 <span>Service #2</span>
               </div>
               <span style="font-size:10px; color:var(--text-muted);">
-                어드민 / 관리
+                어드민 콘솔
               </span>
             </div>
-            <div class="link-title">관리 콘솔 (8080)</div>
-            <div class="link-url">http://hxeep.kro.kr:8080</div>
+            <div class="link-title">관리 콘솔</div>
             <div class="link-desc">
-              어드민 콘솔, 리포트 뷰어나 백엔드 관리 UI 등 관리용 서비스에 할당해 두기 좋습니다.
+              어드민, 리포트, 설정 등 관리용 UI를 모아둔 콘솔 서비스입니다.
             </div>
             <div class="link-footer">
-              <span>HTTP 서비스 · Port 8080</span>
               <button class="link-btn">
                 열기
                 <span>↗</span>
@@ -649,16 +615,14 @@
                 <span>Service #3</span>
               </div>
               <span style="font-size:10px; color:var(--text-muted);">
-                모니터링 / 기타
+                모니터링
               </span>
             </div>
-            <div class="link-title">모니터링 / 툴 (38082)</div>
-            <div class="link-url">http://hxeep.kro.kr:38082</div>
+            <div class="link-title">모니터링 / 대시보드</div>
             <div class="link-desc">
-              Grafana, Prometheus UI, 혹은 기타 내부 툴들을 연결하기 좋은 보조 엔드포인트입니다.
+              Prometheus, Grafana 등 시스템 상태를 확인하는 모니터링 뷰에 연결합니다.
             </div>
             <div class="link-footer">
-              <span>HTTP 서비스 · Port 38082</span>
               <button class="link-btn">
                 열기
                 <span>↗</span>
@@ -666,51 +630,151 @@
             </div>
           </article>
         </section>
+
+        <!-- 금 실시간 시세 섹션 -->
+        <section class="gold-section">
+          <div class="gold-title-row">
+            <div>
+              <div class="gold-title">실시간 금 시세</div>
+              <div class="gold-subtitle">
+                XAU 기준 1oz 금 시세를 KRW 단위로 표시합니다. (예시 · API 연동 가능)
+              </div>
+            </div>
+          </div>
+
+          <div class="gold-card">
+            <div class="gold-card-inner">
+              <div class="gold-main">
+                <div class="gold-label">현재 시세</div>
+                <div class="gold-price">
+                  <span id="goldPrice">로딩 중...</span>
+                  <span class="gold-unit">KRW / 1oz</span>
+                </div>
+                <div class="gold-meta">
+                  <span id="goldUpdatedAt">업데이트 시각: -</span>
+                  <span class="gold-refresh-info">
+                    1분마다 자동 갱신되며, 버튼 클릭으로 즉시 새로고침할 수 있습니다.
+                  </span>
+                </div>
+              </div>
+
+              <div class="gold-meta">
+                <div id="goldChangeBadge" class="gold-change" style="display:none;">
+                  <span id="goldChangeDirection">▲</span>
+                  <span id="goldChangeValue">+0</span>
+                </div>
+                <button id="goldRefreshBtn" class="gold-refresh-btn">
+                  새로고침
+                  <span>⟳</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   </div>
 
   <script>
-    // 로그인 / 회원가입 더미 이벤트
-    document.getElementById("authForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const id = document.getElementById("userId").value.trim();
-      const pw = document.getElementById("userPw").value.trim();
-
-      if (!id || !pw) {
-        alert("아이디와 비밀번호를 입력하세요.");
-        return;
-      }
-
-      // 백엔드 연동 시 이 부분만 교체
-      alert(`로그인 요청: ${id}`);
-    });
-
-    document.getElementById("signupBtn").addEventListener("click", function () {
-      alert("회원가입 페이지 또는 모달을 연결해 주세요.");
-    });
-
-    document.getElementById("forgotPw").addEventListener("click", function () {
-      alert("비밀번호 찾기 페이지를 연결해 주세요.");
-    });
-
-    // 링크 카드 클릭 이벤트 (hover + active 효과)
+    // 포털 카드 클릭 → URL은 data-url에서만 읽고, 화면에는 노출 안 함
     const cards = document.querySelectorAll(".link-card");
-
     cards.forEach((card) => {
-      card.addEventListener("click", (e) => {
-        // 버튼이든 카드든 어디를 눌러도 이동
+      card.addEventListener("click", () => {
         const url = card.dataset.url;
         if (!url) return;
 
-        // active 스타일 토글
         cards.forEach((c) => c.classList.remove("active"));
         card.classList.add("active");
 
         window.open(url, "_blank");
       });
     });
+
+    // 금 시세 위젯
+    const goldPriceEl = document.getElementById("goldPrice");
+    const goldUpdatedAtEl = document.getElementById("goldUpdatedAt");
+    const goldChangeBadgeEl = document.getElementById("goldChangeBadge");
+    const goldChangeDirectionEl = document.getElementById("goldChangeDirection");
+    const goldChangeValueEl = document.getElementById("goldChangeValue");
+    const goldRefreshBtn = document.getElementById("goldRefreshBtn");
+
+    let lastPrice = null;
+
+    // ★ 실제 금 시세 API 연동 시 아래 URL/로직을 교체하면 됩니다.
+    const GOLD_API_URL = "https://apis.data.go.kr/1160100/service/GetGeneralProductInfoService/getGoldPriceInfo?serviceKey=TOXj1Ao0Jqg0Gm1tekxaETuBZ2osjsjGp9HBCFRuySPalrR/iuawuZYXDwS56FQdF3WxdYmjOzX8U+jVMQSP5Q==&pageNo=1&numOfRows=1"; // TODO: 실제 API 엔드포인트로 변경
+
+    async function fetchGoldPriceReal() {
+      // 이 함수는 예시용입니다. 실제 API 형태에 맞게 수정해야 합니다.
+      const res = await fetch(GOLD_API_URL);
+      const data = await res.json();
+
+      // TODO: data에서 실제 금 시세 값 파싱
+      // 예: const price = data.price_krw;
+      const price = data.price_krw;
+
+      return price;
+    }
+
+    async function updateGoldPrice() {
+      try {
+        // 실제 연동 시 이 부분 사용
+        // const price = await fetchGoldPriceReal();
+
+        // 데모용: 임의 시세 생성 (약 3,000,000 ~ 3,200,000 사이)
+        const randomBase = 3000000;
+        const randomDiff = Math.floor(Math.random() * 200000);
+        const price = randomBase + randomDiff;
+
+        const formatted = price.toLocaleString("ko-KR");
+        goldPriceEl.textContent = formatted;
+
+        const now = new Date();
+        const timeString = now.toLocaleString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        goldUpdatedAtEl.textContent = `업데이트 시각: ${timeString}`;
+
+        if (lastPrice !== null) {
+          const diff = price - lastPrice;
+          const diffAbs = Math.abs(diff);
+          const diffText = diffAbs.toLocaleString("ko-KR");
+
+          if (diff === 0) {
+            goldChangeBadgeEl.style.display = "none";
+          } else {
+            goldChangeBadgeEl.style.display = "inline-flex";
+            goldChangeValueEl.textContent = `${diff > 0 ? "+" : "-"}${diffText} KRW`;
+            if (diff > 0) {
+              goldChangeDirectionEl.textContent = "▲";
+              goldChangeBadgeEl.classList.remove("down");
+            } else {
+              goldChangeDirectionEl.textContent = "▼";
+              goldChangeBadgeEl.classList.add("down");
+            }
+          }
+        }
+
+        lastPrice = price;
+      } catch (err) {
+        console.error("금 시세 조회 오류:", err);
+        goldPriceEl.textContent = "연동 필요";
+        goldUpdatedAtEl.textContent = "업데이트 시각: API 설정을 확인하세요.";
+        goldChangeBadgeEl.style.display = "none";
+      }
+    }
+
+    goldRefreshBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      updateGoldPrice();
+    });
+
+    // 초기 1회 호출 + 1분마다 자동 갱신
+    updateGoldPrice();
+    setInterval(updateGoldPrice, 60 * 1000);
   </script>
 </body>
-
 </html>
