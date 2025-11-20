@@ -9,3 +9,4 @@ spec:
     app: nginx
   ports:
   - port: 30080
+    targetPort: 30792
