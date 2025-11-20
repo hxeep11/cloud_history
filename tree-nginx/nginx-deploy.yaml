@@ -17,4 +17,4 @@ spec:
       - name: nginx
         image: docker.io/library/nginx:1.25.3   # ← 여기!
         ports:
-        - containerPort: 30080
+        - containerPort: 80
