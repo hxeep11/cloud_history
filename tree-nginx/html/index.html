@@ -494,6 +494,110 @@
       box-shadow: none;
     }
 
+    /* g 기준 비교 UI */
+    .gold-compare {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .gold-compare-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(249, 250, 251, 0.9);
+    }
+
+    .gold-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gold-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .gold-input-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .gold-input {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 3px 8px;
+      font-size: 11px;
+      color: var(--text-main);
+      width: 120px;
+    }
+
+    .gold-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+
+    .gold-compare-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .gold-compare-btn {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(250, 250, 250, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, transform 0.12s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .gold-compare-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    .gold-compare-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .gold-compare-result {
+      margin-top: 4px;
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.95);
+      line-height: 1.5;
+    }
+
+    .gold-compare-highlight {
+      font-weight: 600;
+    }
+
+    .gold-compare-premium-up {
+      color: #f97316;
+      font-weight: 600;
+    }
+
+    .gold-compare-premium-down {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
     @media (max-width: 768px) {
       .gold-card-inner {
         flex-direction: column;
@@ -607,7 +711,7 @@
             </div>
           </article>
 
-          <!-- 카드 2 -->
+          <!-- 카드 3 -->
           <article class="link-card" data-url="http://hxeep.kro.kr:38082">
             <div class="link-chip-row">
               <div class="link-chip">
@@ -630,7 +734,7 @@
             </div>
           </article>
 
-          <!-- 카드 3 -->
+          <!-- 카드 4 -->
           <article class="link-card" data-url="http://hxeep.kro.kr:8080">
             <div class="link-chip-row">
               <div class="link-chip">
@@ -660,7 +764,7 @@
             <div>
               <div class="gold-title">실시간 금 시세</div>
               <div class="gold-subtitle">
-                XAU 기준 1oz 금 시세를 KRW 단위로 표시합니다. (예시 · API 연동 가능)
+                XAU 기준 1oz 금 시세 및 g당 국제가·한국가를 비교 표시합니다. (예시 · API 연동 가능)
               </div>
             </div>
           </div>
@@ -668,7 +772,7 @@
           <div class="gold-card">
             <div class="gold-card-inner">
               <div class="gold-main">
-                <div class="gold-label">현재 시세</div>
+                <div class="gold-label">현재 시세 (샘플)</div>
                 <div class="gold-price">
                   <span id="goldPrice">로딩 중...</span>
                   <span class="gold-unit">KRW / 1oz</span>
@@ -690,6 +794,60 @@
                   새로고침
                   <span>⟳</span>
                 </button>
+              </div>
+            </div>
+
+            <!-- g 기준 국제가 vs 한국가 비교 블록 -->
+            <div class="gold-compare">
+              <div class="gold-compare-title">g 기준 국제가 / 한국가 비교</div>
+
+              <div class="gold-input-row">
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="intlOzUsd">국제가 (1oz, USD)</label>
+                  <input
+                    type="number"
+                    id="intlOzUsd"
+                    class="gold-input"
+                    value="2400"
+                    step="0.01"
+                  />
+                </div>
+
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="fxUsdKrw">환율 (1 USD = KRW)</label>
+                  <input
+                    type="number"
+                    id="fxUsdKrw"
+                    class="gold-input"
+                    value="1400"
+                    step="0.01"
+                  />
+                </div>
+
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="krwPerDon">한국가 (1돈, KRW)</label>
+                  <input
+                    type="number"
+                    id="krwPerDon"
+                    class="gold-input"
+                    value="390000"
+                    step="1"
+                  />
+                </div>
+              </div>
+
+              <div class="gold-compare-actions">
+                <button id="goldCompareBtn" class="gold-compare-btn">
+                  g 기준 비교 계산
+                  <span>≒</span>
+                </button>
+                <span style="font-size:10px; color:var(--text-muted);">
+                  1oz = 31.1034768g, 1돈 = 3.75g 기준
+                </span>
+              </div>
+
+              <div id="goldCompareResult" class="gold-compare-result">
+                <!-- 계산 결과 표시 영역 -->
               </div>
             </div>
           </div>
@@ -721,10 +879,22 @@
     const goldChangeValueEl = document.getElementById("goldChangeValue");
     const goldRefreshBtn = document.getElementById("goldRefreshBtn");
 
+    // g 기준 국제가/한국가 비교용 상수
+    const INTL_OZ_G = 31.1034768; // 1 트로이온스(g)
+    const DON_G = 3.75;           // 1 돈(g)
+
+    // g 기준 비교용 엘리먼트
+    const intlOzUsdInput = document.getElementById("intlOzUsd");
+    const fxUsdKrwInput = document.getElementById("fxUsdKrw");
+    const krwPerDonInput = document.getElementById("krwPerDon");
+    const goldCompareBtn = document.getElementById("goldCompareBtn");
+    const goldCompareResultEl = document.getElementById("goldCompareResult");
+
     let lastPrice = null;
 
     // ★ 실제 금 시세 API 연동 시 아래 URL/로직을 교체하면 됩니다.
-    const GOLD_API_URL = "https://apis.data.go.kr/1160100/service/GetGeneralProductInfoService/getGoldPriceInfo?serviceKey=TOXj1Ao0Jqg0Gm1tekxaETuBZ2osjsjGp9HBCFRuySPalrR/iuawuZYXDwS56FQdF3WxdYmjOzX8U+jVMQSP5Q==&pageNo=1&numOfRows=1"; // TODO: 실제 API 엔드포인트로 변경
+    const GOLD_API_URL =
+      "https://apis.data.go.kr/1160100/service/GetGeneralProductInfoService/getGoldPriceInfo?serviceKey=TOXj1Ao0Jqg0Gm1tekxaETuBZ2osjsjGp9HBCFRuySPalrR/iuawuZYXDwS56FQdF3WxdYmjOzX8U+jVMQSP5Q==&pageNo=1&numOfRows=1"; // TODO: 실제 API 엔드포인트로 변경
 
     async function fetchGoldPriceReal() {
       // 이 함수는 예시용입니다. 실제 API 형태에 맞게 수정해야 합니다.
@@ -790,14 +960,71 @@
       }
     }
 
+    // g 기준 국제가 vs 한국가 비교 계산
+    function calcGoldCompare() {
+      const intlOzUsd = parseFloat(intlOzUsdInput.value);
+      const fxUsdKrw = parseFloat(fxUsdKrwInput.value);
+      const krwPerDon = parseFloat(krwPerDonInput.value);
+
+      if (isNaN(intlOzUsd) || isNaN(fxUsdKrw) || isNaN(krwPerDon)) {
+        goldCompareResultEl.innerHTML =
+          "<span style='color:#f97373;'>모든 값을 숫자로 입력해 주세요.</span>";
+        return;
+      }
+
+      // 국제가: 1oz(USD) → KRW → g당 가격
+      const intlPerG_Krw = (intlOzUsd * fxUsdKrw) / INTL_OZ_G;
+
+      // 한국가: 1돈(KRW) → g당 가격
+      const krPerG_Krw = krwPerDon / DON_G;
+
+      // 한국가 프리미엄(또는 할인) 비율
+      const premiumRate = (krPerG_Krw / intlPerG_Krw - 1) * 100;
+
+      let premiumHtml = "";
+      if (premiumRate > 0) {
+        premiumHtml = `<span class="gold-compare-premium-up">한국 금 가격이 국제가 대비 약 ${premiumRate.toFixed(
+          2
+        )}% 비쌉니다.</span>`;
+      } else if (premiumRate < 0) {
+        premiumHtml = `<span class="gold-compare-premium-down">한국 금 가격이 국제가 대비 약 ${Math.abs(
+          premiumRate
+        ).toFixed(2)}% 저렴합니다.</span>`;
+      } else {
+        premiumHtml = "국제가와 한국가가 g당 기준으로 거의 동일합니다.";
+      }
+
+      goldCompareResultEl.innerHTML = `
+        <div>
+          ◼ 국제가 기준: <span class="gold-compare-highlight">${intlPerG_Krw.toFixed(
+            2
+          )}</span> KRW/g<br />
+          ◼ 한국가 기준: <span class="gold-compare-highlight">${krPerG_Krw.toFixed(
+            2
+          )}</span> KRW/g
+        </div>
+        <div style="margin-top:4px;">
+          ${premiumHtml}
+        </div>
+      `;
+    }
+
     goldRefreshBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       updateGoldPrice();
     });
 
+    goldCompareBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      calcGoldCompare();
+    });
+
     // 초기 1회 호출 + 1분마다 자동 갱신
     updateGoldPrice();
     setInterval(updateGoldPrice, 60 * 1000);
+
+    // 페이지 로드시 g 기준 비교도 한 번 계산
+    calcGoldCompare();
   </script>
 </body>
 </html>
