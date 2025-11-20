@@ -8,5 +8,5 @@ spec:
   selector:
     app: nginx
   ports:
-  - port: 30080
-    targetPort: 30792
+  - port: 80
+    targetPort: 30080
