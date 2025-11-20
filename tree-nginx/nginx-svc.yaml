@@ -8,5 +8,6 @@ spec:
   selector:
     app: nginx
   ports:
-  - port: 80
-    targetPort: 30080
+  - port: 80 # lan port
+    targetPort: 80 # container port
+    nodePort: 30080 # node port
