@@ -2,7 +2,7 @@
 
 time=$(date '+%Y%m%d%H%M')
 
-# 현재 브랜치 정확히 가져오기 (main 고정)
+# 현재 브랜치 정확히 가져오기 (없으면 main)
 branch=$(git branch --show-current)
 [ -z "$branch" ] && branch="main"
 
@@ -17,16 +17,14 @@ if [ -z "$GIT_TOKEN" ]; then
     exit 1
 fi
 
-# ✅ origin URL 가져오기
-origin_url=$(git remote get-url origin)
+# ✅ origin URL 가져오기 (토큰 없는 깨끗한 URL인지 한 번만 수동으로 정리해두면 좋음)
+origin_url=$(git remote get-url "$remote")
 
-# ✅ 토큰 포함 URL 생성 (https 전용)
-# 예: https://github.com/user/repo.git
-# → https://TOKEN@github.com/user/repo.git
-auth_url=$(echo "$origin_url" | sed "s#https://#https://$GIT_TOKEN@#")
+# ✅ 토큰 포함 URL 생성 (GitHub: x-access-token:<TOKEN>@ 형식)
+auth_url=$(echo "$origin_url" | sed "s#https://#https://x-access-token:$GIT_TOKEN@#")
 
 # ✅ 임시로 인증 URL 세팅
-git remote set-url origin "$auth_url"
+git remote set-url "$remote" "$auth_url"
 
 # ✅ ADD
 git add .
@@ -34,6 +32,8 @@ if [ $? -eq 0 ]; then
     echo -e "\E[42;37mADD : OK\E[0m"
 else
     echo -e "\E[41;37mADD : FAIL\E[0m"
+    # 원래 URL로 복구
+    git remote set-url "$remote" "$origin_url"
     exit 1
 fi
 
@@ -42,21 +42,22 @@ git commit -m "$time"
 if [ $? -eq 0 ]; then
     echo -e "\E[42;37mCOMMIT : OK\E[0m"
 else
-    echo -e "\E[41;37mCOMMIT : FAIL\E[0m"
-    # 커밋이 없을 때도 push는 의미 없으니 종료
+    echo -e "\E[41;37mCOMMIT : FAIL (no changes?)\E[0m"
+    git remote set-url "$remote" "$origin_url"
     exit 1
 fi
 
 # ✅ PUSH
-git push origin "$branch" --force
+git push "$remote" "$branch" --force
 if [ $? -eq 0 ]; then
     echo -e "\E[42;37mPUSH : OK\E[0m"
 else
     echo -e "\E[41;37mPUSH : FAIL\E[0m"
+    git remote set-url "$remote" "$origin_url"
     exit 1
 fi
 
-# ✅ 보안: push 끝나면 원래 URL로 복구 (토큰 잔존 방지)
-git remote set-url origin "$origin_url"
+# ✅ 보안: push 끝나면 원래 URL로 복구
+git remote set-url "$remote" "$origin_url"
 
 echo -e "\E[44;37mDONE\E[0m"
