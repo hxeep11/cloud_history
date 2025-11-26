@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_USERNAME/YOUR_REPO.git
+    repoURL: https://github.com/hxeep11/cloud_history/tree/main
     targetRevision: HEAD
     path: argocd-ingress
   destination:
