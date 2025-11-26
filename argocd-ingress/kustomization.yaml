@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: argocd-ingress:kustomize.config.k8s.io/Kustomization:argocd/
+
+resources:
+  - ingress-controller-svc.yaml
+  - ingress.yaml
