@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hub - 게시판</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🚀 Tech Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="board.html" class="active">게시판</a></li>
+                <li><a href="blog.html">블로그</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h2>커뮤니티 게시판</h2>
+            <p>자유롭게 의견을 나누고 질문해보세요</p>
+        </div>
+    </div>
+
+    <main class="container board-container">
+        <div class="board-controls">
+            <div class="search-box">
+                <input type="text" placeholder="게시글 검색..." id="searchInput">
+                <button class="btn btn-search">🔍 검색</button>
+            </div>
+            <button class="btn btn-primary">✏️ 글쓰기</button>
+        </div>
+
+        <div class="board-filters">
+            <button class="filter-btn active" data-category="all">전체</button>
+            <button class="filter-btn" data-category="question">질문</button>
+            <button class="filter-btn" data-category="discussion">토론</button>
+            <button class="filter-btn" data-category="tip">팁</button>
+            <button class="filter-btn" data-category="news">뉴스</button>
+        </div>
+
+        <div class="board-list">
+            <div class="board-item" data-category="question">
+                <div class="board-status hot">🔥</div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">Kubernetes Pod가 계속 재시작되는 문제</a>
+                        <span class="comment-count">42</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge question">질문</span>
+                        <span class="author">개발자A</span>
+                        <span class="date">2시간 전</span>
+                        <span class="views">👁️ 324</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">28</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="discussion">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">마이크로서비스 vs 모놀리식, 어떤 것을 선택해야 할까요?</a>
+                        <span class="comment-count">67</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge discussion">토론</span>
+                        <span class="author">아키텍트B</span>
+                        <span class="date">5시간 전</span>
+                        <span class="views">👁️ 892</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">45</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="tip">
+                <div class="board-status new">NEW</div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">Docker 이미지 크기 줄이는 10가지 방법</a>
+                        <span class="comment-count">15</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge tip">팁</span>
+                        <span class="author">DevOps엔지니어C</span>
+                        <span class="date">1일 전</span>
+                        <span class="views">👁️ 1.2k</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">89</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="news">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">Kubernetes 1.30 주요 변경사항 정리</a>
+                        <span class="comment-count">23</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge news">뉴스</span>
+                        <span class="author">테크리더D</span>
+                        <span class="date">2일 전</span>
+                        <span class="views">👁️ 567</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">34</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="question">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">ArgoCD 자동 배포 설정 관련 질문입니다</a>
+                        <span class="comment-count">8</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge question">질문</span>
+                        <span class="author">주니어개발자E</span>
+                        <span class="date">3일 전</span>
+                        <span class="views">👁️ 189</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">12</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="discussion">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">2025년 백엔드 개발 트렌드 예측</a>
+                        <span class="comment-count">91</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge discussion">토론</span>
+                        <span class="author">백엔드개발자F</span>
+                        <span class="date">4일 전</span>
+                        <span class="views">👁️ 2.3k</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">156</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="tip">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">Git 브랜치 전략 베스트 프랙티스</a>
+                        <span class="comment-count">34</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge tip">팁</span>
+                        <span class="author">시니어개발자G</span>
+                        <span class="date">5일 전</span>
+                        <span class="views">👁️ 987</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">67</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="board-item" data-category="question">
+                <div class="board-status"></div>
+                <div class="board-main">
+                    <div class="board-title">
+                        <a href="post.html">Ingress Controller 설정 방법 문의</a>
+                        <span class="comment-count">19</span>
+                    </div>
+                    <div class="board-meta">
+                        <span class="category-badge question">질문</span>
+                        <span class="author">인프라엔지니어H</span>
+                        <span class="date">1주 전</span>
+                        <span class="views">👁️ 445</span>
+                    </div>
+                </div>
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">좋아요</span>
+                        <span class="stat-value">21</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button class="page-btn" disabled>이전</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">다음</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tech Hub. Deployed with ArgoCD on Kubernetes.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

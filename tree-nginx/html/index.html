@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>포털 메인</title>
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-card: #111827;
+      --bg-card-hover: #1f2937;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 전체 레이아웃 */
+    .layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* 사이드바 */
+    .sidebar {
+      width: 260px;
+      background: linear-gradient(180deg, #020617 0%, #030712 50%, #020617 100%);
+      border-right: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 0%, #38bdf8, #0ea5e9, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      color: white;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+    }
+
+    .logo-text-main {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .menu-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .menu-item {
+      padding: 8px 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-main);
+      transition: background 0.18s ease, transform 0.12s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .menu-item span.label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+    }
+
+    .menu-item:hover {
+      background: rgba(15, 23, 42, 0.9);
+      transform: translateX(2px);
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.7);
+    }
+
+    .menu-item.active {
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 16px rgba(37, 99, 235, 0.7);
+    }
+
+    /* 메인 영역 */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 22px 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(56, 189, 248, 0.18),
+        transparent 60%
+      );
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .main-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .main-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .main-title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .main-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    /* 링크 카드 영역 */
+    .cards-grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .link-card {
+      position: relative;
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      background: radial-gradient(circle at top, #020617 0, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease,
+        border-color 0.18s ease, background 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(
+        circle at top,
+        rgba(56, 189, 248, 0.12),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    .link-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 26px 80px rgba(15, 23, 42, 1);
+      border-color: rgba(56, 189, 248, 0.7);
+      background: radial-gradient(circle at top, #020617 0, #020617 55%);
+    }
+
+    .link-card:hover::before {
+      opacity: 1;
+    }
+
+    .link-card:active {
+      transform: translateY(-1px) scale(0.99);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+    }
+
+    .link-chip-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .link-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .link-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .link-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .link-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .link-footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      gap: 8px;
+    }
+
+    .link-btn {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(15, 23, 42, 0.9);
+      transition: background 0.16s ease, border 0.16s ease,
+        transform 0.12s ease;
+    }
+
+    .link-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .link-btn:active {
+      transform: translateY(0);
+    }
+
+    .link-card.active {
+      border-color: #22c55e;
+      box-shadow: 0 26px 80px rgba(34, 197, 94, 0.35);
+    }
+
+    /* 금 시세 섹션 */
+    .gold-section {
+      margin-top: 26px;
+    }
+
+    .gold-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .gold-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .gold-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .gold-card {
+      border-radius: 20px;
+      padding: 18px 20px;
+      background: radial-gradient(circle at top, #020617 0, #020617 65%);
+      border: 1px solid rgba(250, 204, 21, 0.6);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gold-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(
+        circle at top left,
+        rgba(250, 204, 21, 0.28),
+        transparent 60%
+      );
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .gold-card-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .gold-main {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .gold-label {
+      font-size: 12px;
+      color: rgba(250, 250, 250, 0.85);
+    }
+
+    .gold-price {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .gold-unit {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .gold-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .gold-change {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(22, 163, 74, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+    }
+
+    .gold-change.down {
+      background: rgba(220, 38, 38, 0.18);
+      border-color: rgba(248, 113, 113, 0.9);
+    }
+
+    .gold-refresh-info {
+      font-size: 10px;
+      opacity: 0.8;
+    }
+
+    .gold-refresh-btn {
+      border-radius: 999px;
+      padding: 5px 10px;
+      border: 1px solid rgba(250, 250, 250, 0.7);
+      background: rgba(15, 23, 42, 0.85);
+      color: #f9fafb;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, transform 0.12s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .gold-refresh-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    .gold-refresh-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    /* g 기준 비교 UI */
+    .gold-compare {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .gold-compare-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(249, 250, 251, 0.9);
+    }
+
+    .gold-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gold-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .gold-input-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .gold-input {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 3px 8px;
+      font-size: 11px;
+      color: var(--text-main);
+      width: 120px;
+    }
+
+    .gold-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+    }
+
+    .gold-compare-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .gold-compare-btn {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(250, 250, 250, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      font-size: 11px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.15s ease, transform 0.12s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .gold-compare-btn:hover {
+      background: rgba(15, 23, 42, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.9);
+    }
+
+    .gold-compare-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .gold-compare-result {
+      margin-top: 4px;
+      font-size: 11px;
+      color: rgba(226, 232, 240, 0.95);
+      line-height: 1.5;
+    }
+
+    .gold-compare-highlight {
+      font-weight: 600;
+    }
+
+    .gold-compare-premium-up {
+      color: #f97316;
+      font-weight: 600;
+    }
+
+    .gold-compare-premium-down {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .gold-card-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- 사이드바 (로그인 없음) -->
+    <aside class="sidebar">
+      <div class="logo-area">
+        <div class="logo-badge">P</div>
+        <div>
+          <div class="logo-text-main">Portal Space</div>
+          <div class="logo-text-sub">Cluster / Tools / Apps</div>
+        </div>
+      </div>
+
+      <div class="menu">
+        <div class="menu-title">메뉴</div>
+
+        <div class="menu-item active">
+          <span class="label">
+            <span class="dot"></span>
+            <span>메인 대시보드</span>
+          </span>
+          <span style="font-size:11px; color:var(--text-muted)">Home</span>
+        </div>
+
+        <div class="menu-item">
+          <span class="label">
+            <span class="dot"></span>
+            <span>서비스 링크</span>
+          </span>
+          <span style="font-size:11px; color:var(--text-muted)">Links</span>
+        </div>
+
+        <div class="menu-item">
+          <span class="label">
+            <span class="dot"></span>
+            <span>환경 설정</span>
+          </span>
+          <span style="font-size:11px; color:var(--text-muted)">Settings</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 메인 -->
+    <main class="main">
+      <div class="main-inner">
+        <header class="main-header">
+          <div class="main-title-group">
+            <div class="main-title">portal</div>
+            <div class="main-subtitle">
+              자주 사용하는 툴과 서비스를 한 화면에서 빠르게 접근할 수 있도록 정리한 개인 포털입니다.
+            </div>
+          </div>
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Cluster 및 서비스 상태 정상</span>
+          </div>
+        </header>
+
+        <!-- 링크 카드 그리드 (URL/포트 표시는 숨김) -->
+        <section class="cards-grid">
+          <!-- 카드 1 -->
+          <article class="link-card" data-url="http://hxeep.kro.kr:32080">
+            <div class="link-chip-row">
+              <div class="link-chip">
+                <span class="link-chip-dot"></span>
+                <span>Service #1</span>
+              </div>
+              <span style="font-size:10px; color:var(--text-muted);">
+                ArgoCD Console
+              </span>
+            </div>
+            <div class="link-title">ArgoCD</div>
+            <div class="link-desc">
+              argo-cd CI-CD 구축 콘솔
+            </div>
+            <div class="link-footer">
+              <button class="link-btn">
+                열기
+                <span>↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- 카드 2 -->
+          <article class="link-card" data-url="http://hxeep.kro.kr:8081">
+            <div class="link-chip-row">
+              <div class="link-chip">
+                <span class="link-chip-dot"></span>
+                <span>Service #2</span>
+              </div>
+              <span style="font-size:10px; color:var(--text-muted);">
+                Prometheus
+              </span>
+            </div>
+            <div class="link-title">데이터 수집 콘솔</div>
+            <div class="link-desc">
+              시계열 데이터 수집 서버
+            </div>
+            <div class="link-footer">
+              <button class="link-btn">
+                열기
+                <span>↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- 카드 3 -->
+          <article class="link-card" data-url="http://hxeep.kro.kr:38082">
+            <div class="link-chip-row">
+              <div class="link-chip">
+                <span class="link-chip-dot"></span>
+                <span>Service #2</span>
+              </div>
+              <span style="font-size:10px; color:var(--text-muted);">
+                Alert Console
+              </span>
+            </div>
+            <div class="link-title">알람 관리 콘솔</div>
+            <div class="link-desc">
+              Alert-manager 알림 관리 콘솔입니다.
+            </div>
+            <div class="link-footer">
+              <button class="link-btn">
+                열기
+                <span>↗</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- 카드 4 -->
+          <article class="link-card" data-url="http://hxeep.kro.kr:8080">
+            <div class="link-chip-row">
+              <div class="link-chip">
+                <span class="link-chip-dot"></span>
+                <span>Service #3</span>
+              </div>
+              <span style="font-size:10px; color:var(--text-muted);">
+                모니터링
+              </span>
+            </div>
+            <div class="link-title">모니터링 / 대시보드</div>
+            <div class="link-desc">
+              Prometheus, Grafana 등 시스템 상태를 확인하는 모니터링 뷰에 연결합니다.
+            </div>
+            <div class="link-footer">
+              <button class="link-btn">
+                열기
+                <span>↗</span>
+              </button>
+            </div>
+          </article>
+        </section>
+
+        <!-- 금 실시간 시세 섹션 -->
+        <section class="gold-section">
+          <div class="gold-title-row">
+            <div>
+              <div class="gold-title">실시간 금 시세</div>
+              <div class="gold-subtitle">
+                XAU 기준 1oz 금 시세 및 g당 국제가·한국가를 비교 표시합니다. (예시 · API 연동 가능)
+              </div>
+            </div>
+          </div>
+
+          <div class="gold-card">
+            <div class="gold-card-inner">
+              <div class="gold-main">
+                <div class="gold-label">현재 시세 (샘플)</div>
+                <div class="gold-price">
+                  <span id="goldPrice">로딩 중...</span>
+                  <span class="gold-unit">KRW / 1oz</span>
+                </div>
+                <div class="gold-meta">
+                  <span id="goldUpdatedAt">업데이트 시각: -</span>
+                  <span class="gold-refresh-info">
+                    1분마다 자동 갱신되며, 버튼 클릭으로 즉시 새로고침할 수 있습니다.
+                  </span>
+                </div>
+              </div>
+
+              <div class="gold-meta">
+                <div id="goldChangeBadge" class="gold-change" style="display:none;">
+                  <span id="goldChangeDirection">▲</span>
+                  <span id="goldChangeValue">+0</span>
+                </div>
+                <button id="goldRefreshBtn" class="gold-refresh-btn">
+                  새로고침
+                  <span>⟳</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- g 기준 국제가 vs 한국가 비교 블록 -->
+            <div class="gold-compare">
+              <div class="gold-compare-title">g 기준 국제가 / 한국가 비교</div>
+
+              <div class="gold-input-row">
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="intlOzUsd">국제가 (1oz, USD)</label>
+                  <input
+                    type="number"
+                    id="intlOzUsd"
+                    class="gold-input"
+                    value="2400"
+                    step="0.01"
+                  />
+                </div>
+
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="fxUsdKrw">환율 (1 USD = KRW)</label>
+                  <input
+                    type="number"
+                    id="fxUsdKrw"
+                    class="gold-input"
+                    value="1469"
+                    step="0.01"
+                  />
+                </div>
+
+                <div class="gold-input-group">
+                  <label class="gold-input-label" for="krwPerDon">한국가 (1돈, KRW)</label>
+                  <input
+                    type="number"
+                    id="krwPerDon"
+                    class="gold-input"
+                    value="390000"
+                    step="1"
+                  />
+                </div>
+              </div>
+
+              <div class="gold-compare-actions">
+                <button id="goldCompareBtn" class="gold-compare-btn">
+                  g 기준 비교 계산
+                  <span>≒</span>
+                </button>
+                <span style="font-size:10px; color:var(--text-muted);">
+                  1oz = 31.1034768g, 1돈 = 3.75g 기준
+                </span>
+              </div>
+
+              <div id="goldCompareResult" class="gold-compare-result">
+                <!-- 계산 결과 표시 영역 -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // 포털 카드 클릭 → URL은 data-url에서만 읽고, 화면에는 노출 안 함
+    const cards = document.querySelectorAll(".link-card");
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const url = card.dataset.url;
+        if (!url) return;
+
+        cards.forEach((c) => c.classList.remove("active"));
+        card.classList.add("active");
+
+        window.open(url, "_blank");
+      });
+    });
+
+    // 금 시세 위젯
+    const goldPriceEl = document.getElementById("goldPrice");
+    const goldUpdatedAtEl = document.getElementById("goldUpdatedAt");
+    const goldChangeBadgeEl = document.getElementById("goldChangeBadge");
+    const goldChangeDirectionEl = document.getElementById("goldChangeDirection");
+    const goldChangeValueEl = document.getElementById("goldChangeValue");
+    const goldRefreshBtn = document.getElementById("goldRefreshBtn");
+
+    // g 기준 국제가/한국가 비교용 상수
+    const INTL_OZ_G = 31.1034768; // 1 트로이온스(g)
+    const DON_G = 3.75;           // 1 돈(g)
+
+    // g 기준 비교용 엘리먼트
+    const intlOzUsdInput = document.getElementById("intlOzUsd");
+    const fxUsdKrwInput = document.getElementById("fxUsdKrw");
+    const krwPerDonInput = document.getElementById("krwPerDon");
+    const goldCompareBtn = document.getElementById("goldCompareBtn");
+    const goldCompareResultEl = document.getElementById("goldCompareResult");
+
+    let lastPrice = null;
+
+    // ★ 실제 금 시세 API 연동 시 아래 URL/로직을 교체하면 됩니다.
+    const GOLD_API_URL =
+      "https://apis.data.go.kr/1160100/service/GetGeneralProductInfoService/getGoldPriceInfo?serviceKey=TOXj1Ao0Jqg0Gm1tekxaETuBZ2osjsjGp9HBCFRuySPalrR/iuawuZYXDwS56FQdF3WxdYmjOzX8U+jVMQSP5Q==&pageNo=1&numOfRows=1"; // TODO: 실제 API 엔드포인트로 변경
+
+    async function fetchGoldPriceReal() {
+      // 이 함수는 예시용입니다. 실제 API 형태에 맞게 수정해야 합니다.
+      const res = await fetch(GOLD_API_URL);
+      const data = await res.json();
+
+      // TODO: data에서 실제 금 시세 값 파싱
+      // 예: const price = data.price_krw;
+      const price = data.price_krw;
+
+      return price;
+    }
+
+    async function updateGoldPrice() {
+      try {
+        // 실제 연동 시 이 부분 사용
+        // const price = await fetchGoldPriceReal();
+
+        // 데모용: 임의 시세 생성 (약 3,000,000 ~ 3,200,000 사이)
+        const randomBase = 3000000;
+        const randomDiff = Math.floor(Math.random() * 200000);
+        const price = randomBase + randomDiff;
+
+        const formatted = price.toLocaleString("ko-KR");
+        goldPriceEl.textContent = formatted;
+
+        const now = new Date();
+        const timeString = now.toLocaleString("ko-KR", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        goldUpdatedAtEl.textContent = `업데이트 시각: ${timeString}`;
+
+        if (lastPrice !== null) {
+          const diff = price - lastPrice;
+          const diffAbs = Math.abs(diff);
+          const diffText = diffAbs.toLocaleString("ko-KR");
+
+          if (diff === 0) {
+            goldChangeBadgeEl.style.display = "none";
+          } else {
+            goldChangeBadgeEl.style.display = "inline-flex";
+            goldChangeValueEl.textContent = `${diff > 0 ? "+" : "-"}${diffText} KRW`;
+            if (diff > 0) {
+              goldChangeDirectionEl.textContent = "▲";
+              goldChangeBadgeEl.classList.remove("down");
+            } else {
+              goldChangeDirectionEl.textContent = "▼";
+              goldChangeBadgeEl.classList.add("down");
+            }
+          }
+        }
+
+        lastPrice = price;
+      } catch (err) {
+        console.error("금 시세 조회 오류:", err);
+        goldPriceEl.textContent = "연동 필요";
+        goldUpdatedAtEl.textContent = "업데이트 시각: API 설정을 확인하세요.";
+        goldChangeBadgeEl.style.display = "none";
+      }
+    }
+
+    // g 기준 국제가 vs 한국가 비교 계산
+    function calcGoldCompare() {
+      const intlOzUsd = parseFloat(intlOzUsdInput.value);
+      const fxUsdKrw = parseFloat(fxUsdKrwInput.value);
+      const krwPerDon = parseFloat(krwPerDonInput.value);
+
+      if (isNaN(intlOzUsd) || isNaN(fxUsdKrw) || isNaN(krwPerDon)) {
+        goldCompareResultEl.innerHTML =
+          "<span style='color:#f97373;'>모든 값을 숫자로 입력해 주세요.</span>";
+        return;
+      }
+
+      // 국제가: 1oz(USD) → KRW → g당 가격
+      const intlPerG_Krw = (intlOzUsd * fxUsdKrw) / INTL_OZ_G;
+
+      // 한국가: 1돈(KRW) → g당 가격
+      const krPerG_Krw = krwPerDon / DON_G;
+
+      // 한국가 프리미엄(또는 할인) 비율
+      const premiumRate = (krPerG_Krw / intlPerG_Krw - 1) * 100;
+
+      let premiumHtml = "";
+      if (premiumRate > 0) {
+        premiumHtml = `<span class="gold-compare-premium-up">한국 금 가격이 국제가 대비 약 ${premiumRate.toFixed(
+          2
+        )}% 비쌉니다.</span>`;
+      } else if (premiumRate < 0) {
+        premiumHtml = `<span class="gold-compare-premium-down">한국 금 가격이 국제가 대비 약 ${Math.abs(
+          premiumRate
+        ).toFixed(2)}% 저렴합니다.</span>`;
+      } else {
+        premiumHtml = "국제가와 한국가가 g당 기준으로 거의 동일합니다.";
+      }
+
+      goldCompareResultEl.innerHTML = `
+        <div>
+          ◼ 국제가 기준: <span class="gold-compare-highlight">${intlPerG_Krw.toFixed(
+            2
+          )}</span> KRW/g<br />
+          ◼ 한국가 기준: <span class="gold-compare-highlight">${krPerG_Krw.toFixed(
+            2
+          )}</span> KRW/g
+        </div>
+        <div style="margin-top:4px;">
+          ${premiumHtml}
+        </div>
+      `;
+    }
+
+    goldRefreshBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      updateGoldPrice();
+    });
+
+    goldCompareBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      calcGoldCompare();
+    });
+
+    // 초기 1회 호출 + 1분마다 자동 갱신
+    updateGoldPrice();
+    setInterval(updateGoldPrice, 60 * 1000);
+
+    // 페이지 로드시 g 기준 비교도 한 번 계산
+    calcGoldCompare();
+  </script>
+</body>
+</html>

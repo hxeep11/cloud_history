@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArgoCD로 GitOps 구현하기 - Tech Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🚀 Tech Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="board.html">게시판</a></li>
+                <li><a href="blog.html">블로그</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <article class="post-container">
+        <div class="container">
+            <div class="post-header">
+                <div class="post-breadcrumb">
+                    <a href="index.html">홈</a> / <a href="blog.html">블로그</a> / <span>Kubernetes</span>
+                </div>
+                <h1 class="post-title">Kubernetes에서 ArgoCD로 GitOps 완벽 가이드</h1>
+                <div class="post-meta-bar">
+                    <div class="author-info-large">
+                        <div class="author-avatar">👨‍💻</div>
+                        <div class="author-details">
+                            <div class="author-name">김개발</div>
+                            <div class="author-title">DevOps Engineer</div>
+                        </div>
+                    </div>
+                    <div class="post-meta-info">
+                        <span>📅 2025-11-26</span>
+                        <span>⏱️ 15분</span>
+                        <span>👁️ 2.4k</span>
+                    </div>
+                </div>
+                <div class="post-tags-header">
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">ArgoCD</span>
+                    <span class="tag">GitOps</span>
+                    <span class="tag">DevOps</span>
+                </div>
+            </div>
+
+            <div class="post-content">
+                <div class="post-main">
+                    <div class="post-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 400px; border-radius: 12px; margin-bottom: 2rem;"></div>
+
+                    <h2>GitOps란 무엇인가?</h2>
+                    <p>
+                        GitOps는 Git을 단일 진실 공급원(Single Source of Truth)으로 사용하여 인프라와 애플리케이션을
+                        선언적으로 관리하는 현대적인 배포 방식입니다. 모든 변경사항이 Git 커밋으로 추적되며,
+                        자동화된 프로세스가 이를 운영 환경에 반영합니다.
+                    </p>
+
+                    <div class="info-box">
+                        <strong>💡 핵심 원칙</strong>
+                        <ul>
+                            <li>모든 것을 Git에서 관리</li>
+                            <li>선언적 구성</li>
+                            <li>자동화된 배포</li>
+                            <li>지속적인 동기화</li>
+                        </ul>
+                    </div>
+
+                    <h2>ArgoCD 소개</h2>
+                    <p>
+                        ArgoCD는 Kubernetes를 위한 선언적 GitOps 지속적 배포 도구입니다. Git 저장소의 매니페스트를
+                        모니터링하고 클러스터 상태와 자동으로 동기화합니다.
+                    </p>
+
+                    <h3>주요 기능</h3>
+                    <ul>
+                        <li><strong>자동 동기화</strong>: Git 저장소의 변경사항을 자동으로 감지하고 배포</li>
+                        <li><strong>상태 모니터링</strong>: 실시간으로 애플리케이션 상태 추적</li>
+                        <li><strong>롤백</strong>: 이전 버전으로 쉽게 되돌리기</li>
+                        <li><strong>멀티 클러스터</strong>: 여러 클러스터를 하나의 ArgoCD로 관리</li>
+                    </ul>
+
+                    <h2>ArgoCD 설치하기</h2>
+                    <p>ArgoCD를 Kubernetes 클러스터에 설치하는 방법입니다:</p>
+
+                    <div class="code-block">
+                        <pre><code># ArgoCD 네임스페이스 생성
+kubectl create namespace argocd
+
+# ArgoCD 설치
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# ArgoCD CLI 설치 (macOS)
+brew install argocd
+
+# 초기 비밀번호 확인
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d</code></pre>
+                    </div>
+
+                    <h2>Kustomize와 함께 사용하기</h2>
+                    <p>
+                        Kustomize를 사용하면 환경별로 다른 설정을 효율적으로 관리할 수 있습니다.
+                        ArgoCD는 Kustomize를 기본적으로 지원합니다.
+                    </p>
+
+                    <div class="code-block">
+                        <pre><code># base/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+# overlays/dev/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+namePrefix: dev-
+namespace: dev
+
+replicas:
+  - name: app
+    count: 1</code></pre>
+                    </div>
+
+                    <h2>Application 생성하기</h2>
+                    <p>ArgoCD Application을 정의하여 배포를 자동화합니다:</p>
+
+                    <div class="code-block">
+                        <pre><code>apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blog-board-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/your-repo
+    targetRevision: HEAD
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blog-app-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true</code></pre>
+                    </div>
+
+                    <h2>베스트 프랙티스</h2>
+
+                    <h3>1. 환경 분리</h3>
+                    <p>Dev, Staging, Production 환경을 별도의 오버레이로 관리하세요.</p>
+
+                    <h3>2. 자동 동기화 설정</h3>
+                    <p>
+                        <code>syncPolicy.automated</code>를 설정하여 Git 변경사항을 자동으로 반영합니다.
+                        <code>prune</code>과 <code>selfHeal</code>을 활성화하면 더욱 강력합니다.
+                    </p>
+
+                    <h3>3. Health Check</h3>
+                    <p>리소스의 상태를 정확히 확인하기 위해 적절한 Health Check를 설정하세요.</p>
+
+                    <div class="warning-box">
+                        <strong>⚠️ 주의사항</strong>
+                        <p>
+                            Production 환경에서는 자동 동기화를 신중하게 설정하세요.
+                            수동 승인 프로세스를 고려할 수 있습니다.
+                        </p>
+                    </div>
+
+                    <h2>결론</h2>
+                    <p>
+                        ArgoCD를 활용한 GitOps는 배포 프로세스를 투명하고 추적 가능하게 만듭니다.
+                        Git의 버전 관리 기능과 결합하여 안전하고 효율적인 배포 파이프라인을 구축할 수 있습니다.
+                    </p>
+                    <p>
+                        다음 글에서는 ArgoCD의 고급 기능인 멀티 클러스터 관리와
+                        ApplicationSet에 대해 다루겠습니다.
+                    </p>
+                </div>
+
+                <aside class="post-sidebar">
+                    <div class="sidebar-section sticky">
+                        <h3>목차</h3>
+                        <ul class="toc">
+                            <li><a href="#gitops">GitOps란 무엇인가?</a></li>
+                            <li><a href="#argocd">ArgoCD 소개</a></li>
+                            <li><a href="#install">ArgoCD 설치하기</a></li>
+                            <li><a href="#kustomize">Kustomize와 함께 사용하기</a></li>
+                            <li><a href="#application">Application 생성하기</a></li>
+                            <li><a href="#best">베스트 프랙티스</a></li>
+                            <li><a href="#conclusion">결론</a></li>
+                        </ul>
+
+                        <div class="share-section">
+                            <h4>공유하기</h4>
+                            <div class="share-buttons">
+                                <button class="share-btn">트위터</button>
+                                <button class="share-btn">페이스북</button>
+                                <button class="share-btn">링크 복사</button>
+                            </div>
+                        </div>
+
+                        <div class="like-section">
+                            <button class="like-btn">❤️ 좋아요 156</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="post-footer-section">
+                <div class="author-bio">
+                    <div class="author-avatar-large">👨‍💻</div>
+                    <div class="author-bio-content">
+                        <h3>김개발</h3>
+                        <p class="author-role">DevOps Engineer</p>
+                        <p class="author-description">
+                            10년 차 DevOps 엔지니어로 Kubernetes와 클라우드 네이티브 기술에 관심이 많습니다.
+                            오픈소스 컨트리뷰터이며 기술 공유를 즐깁니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="related-posts">
+                    <h3>관련 글</h3>
+                    <div class="related-grid">
+                        <a href="#" class="related-card">
+                            <div class="related-category">Kubernetes</div>
+                            <h4>Kustomize로 환경별 설정 관리하기</h4>
+                            <p class="related-date">2025-11-25</p>
+                        </a>
+                        <a href="#" class="related-card">
+                            <div class="related-category">DevOps</div>
+                            <h4>Docker 멀티스테이지 빌드 가이드</h4>
+                            <p class="related-date">2025-11-24</p>
+                        </a>
+                        <a href="#" class="related-card">
+                            <div class="related-category">CI/CD</div>
+                            <h4>GitHub Actions로 자동 배포하기</h4>
+                            <p class="related-date">2025-11-23</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="comments-section">
+                    <h3>댓글 <span class="comment-count">23</span></h3>
+                    <div class="comment-form">
+                        <textarea placeholder="댓글을 입력하세요..." rows="4"></textarea>
+                        <button class="btn btn-primary">댓글 작성</button>
+                    </div>
+                    <div class="comments-list">
+                        <div class="comment">
+                            <div class="comment-avatar">👨‍💼</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <strong>개발자A</strong>
+                                    <span class="comment-date">2시간 전</span>
+                                </div>
+                                <p>정말 유용한 가이드네요! ArgoCD 도입을 고민하고 있었는데 큰 도움이 되었습니다.</p>
+                                <div class="comment-actions">
+                                    <button>👍 12</button>
+                                    <button>답글</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-avatar">👩‍💻</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <strong>엔지니어B</strong>
+                                    <span class="comment-date">5시간 전</span>
+                                </div>
+                                <p>실무에서 바로 적용해봤는데 잘 작동합니다. 감사합니다!</p>
+                                <div class="comment-actions">
+                                    <button>👍 8</button>
+                                    <button>답글</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tech Hub. Deployed with ArgoCD on Kubernetes.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

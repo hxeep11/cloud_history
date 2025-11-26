@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hub - 블로그</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🚀 Tech Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="board.html">게시판</a></li>
+                <li><a href="blog.html" class="active">블로그</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="container">
+            <h2>기술 블로그</h2>
+            <p>심도 있는 기술 아티클과 개발 경험을 공유합니다</p>
+        </div>
+    </div>
+
+    <main class="container blog-container">
+        <aside class="blog-sidebar">
+            <div class="sidebar-section">
+                <h3>카테고리</h3>
+                <ul class="category-list">
+                    <li><a href="#" class="active">전체 <span class="count">42</span></a></li>
+                    <li><a href="#">Kubernetes <span class="count">12</span></a></li>
+                    <li><a href="#">DevOps <span class="count">8</span></a></li>
+                    <li><a href="#">Frontend <span class="count">7</span></a></li>
+                    <li><a href="#">Backend <span class="count">9</span></a></li>
+                    <li><a href="#">Cloud <span class="count">6</span></a></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3>인기 태그</h3>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">ArgoCD</a>
+                    <a href="#" class="tag">GitOps</a>
+                    <a href="#" class="tag">Docker</a>
+                    <a href="#" class="tag">CI/CD</a>
+                    <a href="#" class="tag">React</a>
+                    <a href="#" class="tag">Node.js</a>
+                    <a href="#" class="tag">AWS</a>
+                    <a href="#" class="tag">Monitoring</a>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3>최근 댓글</h3>
+                <ul class="recent-comments">
+                    <li>
+                        <div class="comment-author">개발자A</div>
+                        <div class="comment-text">정말 유용한 정보네요!</div>
+                    </li>
+                    <li>
+                        <div class="comment-author">엔지니어B</div>
+                        <div class="comment-text">실무에 바로 적용해봤습니다</div>
+                    </li>
+                    <li>
+                        <div class="comment-author">시니어C</div>
+                        <div class="comment-text">좋은 글 감사합니다</div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="blog-main">
+            <article class="blog-card featured">
+                <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Featured</span>
+                        <span class="blog-date">2025-11-26</span>
+                        <span class="read-time">⏱️ 15분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">Kubernetes에서 ArgoCD로 GitOps 완벽 가이드</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        GitOps는 현대적인 배포 방식의 핵심입니다. 이 글에서는 ArgoCD를 활용하여
+                        Kubernetes 환경에서 완전한 GitOps 파이프라인을 구축하는 방법을 단계별로 설명합니다.
+                        실제 프로덕션 환경에서 사용할 수 있는 모범 사례도 함께 소개합니다.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">ArgoCD</span>
+                        <span class="tag">GitOps</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">👨‍💻</div>
+                            <div class="author-details">
+                                <div class="author-name">김개발</div>
+                                <div class="author-title">DevOps Engineer</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 2.4k</span>
+                            <span>❤️ 156</span>
+                            <span>💬 23</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Kubernetes</span>
+                        <span class="blog-date">2025-11-25</span>
+                        <span class="read-time">⏱️ 10분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">Kustomize를 활용한 환경별 배포 설정 관리</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        Dev, Staging, Production 환경마다 다른 설정이 필요합니다. Kustomize를 사용하면
+                        중복 없이 효율적으로 환경별 설정을 관리할 수 있습니다. 실전 예제와 함께 알아봅니다.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">Kustomize</span>
+                        <span class="tag">Configuration</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">👩‍💻</div>
+                            <div class="author-details">
+                                <div class="author-name">박클라우드</div>
+                                <div class="author-title">Cloud Architect</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 1.8k</span>
+                            <span>❤️ 89</span>
+                            <span>💬 15</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">DevOps</span>
+                        <span class="blog-date">2025-11-24</span>
+                        <span class="read-time">⏱️ 12분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">Docker 멀티스테이지 빌드로 이미지 크기 90% 줄이기</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        Docker 이미지가 너무 크다면 멀티스테이지 빌드를 고려해보세요. 실제 사례를 통해
+                        이미지 크기를 대폭 줄이고 빌드 시간도 단축하는 방법을 소개합니다.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">Docker</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">🧑‍💻</div>
+                            <div class="author-details">
+                                <div class="author-name">이도커</div>
+                                <div class="author-title">Backend Developer</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 3.1k</span>
+                            <span>❤️ 234</span>
+                            <span>💬 42</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Frontend</span>
+                        <span class="blog-date">2025-11-23</span>
+                        <span class="read-time">⏱️ 8분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">CSS Grid와 Flexbox를 함께 사용하는 현대적 레이아웃</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        CSS Grid와 Flexbox는 경쟁 관계가 아닙니다. 각각의 장점을 이해하고 상황에 맞게
+                        조합하면 강력하고 유연한 레이아웃을 만들 수 있습니다.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">CSS</span>
+                        <span class="tag">Layout</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">👨‍🎨</div>
+                            <div class="author-details">
+                                <div class="author-name">최프론트</div>
+                                <div class="author-title">Frontend Engineer</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 1.5k</span>
+                            <span>❤️ 67</span>
+                            <span>💬 12</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Backend</span>
+                        <span class="blog-date">2025-11-22</span>
+                        <span class="read-time">⏱️ 20분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">마이크로서비스 아키텍처 실전 가이드</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        마이크로서비스로의 전환을 고민하고 계신가요? 실제 프로젝트 경험을 바탕으로
+                        마이크로서비스 아키텍처의 장단점과 도입 시 고려사항을 상세히 다룹니다.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">Microservices</span>
+                        <span class="tag">Architecture</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">👩‍🔧</div>
+                            <div class="author-details">
+                                <div class="author-name">정아키텍트</div>
+                                <div class="author-title">Software Architect</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 4.2k</span>
+                            <span>❤️ 312</span>
+                            <span>💬 67</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Cloud</span>
+                        <span class="blog-date">2025-11-21</span>
+                        <span class="read-time">⏱️ 15분</span>
+                    </div>
+                    <h2 class="blog-title">
+                        <a href="post.html">AWS EKS 비용 최적화 전략</a>
+                    </h2>
+                    <p class="blog-excerpt">
+                        클라우드 비용이 부담되시나요? AWS EKS 환경에서 성능은 유지하면서 비용을 절감할 수 있는
+                        실용적인 전략들을 소개합니다. 실제 적용 사례와 함께 확인하세요.
+                    </p>
+                    <div class="blog-tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Cost</span>
+                        <span class="tag">EKS</span>
+                    </div>
+                    <div class="blog-footer">
+                        <div class="author-info">
+                            <div class="author-avatar">☁️</div>
+                            <div class="author-details">
+                                <div class="author-name">강클라우드</div>
+                                <div class="author-title">Cloud Engineer</div>
+                            </div>
+                        </div>
+                        <div class="blog-stats">
+                            <span>👁️ 2.9k</span>
+                            <span>❤️ 178</span>
+                            <span>💬 34</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="pagination">
+                <button class="page-btn" disabled>이전</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">다음</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tech Hub. Deployed with ArgoCD on Kubernetes.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

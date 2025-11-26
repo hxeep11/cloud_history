@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Hub - 홈</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🚀 Tech Hub</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="board.html">게시판</a></li>
+                <li><a href="blog.html">블로그</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">기술과 아이디어가 만나는 공간</h2>
+                <p class="hero-subtitle">최신 기술 트렌드와 개발 경험을 공유합니다</p>
+                <div class="hero-buttons">
+                    <a href="blog.html" class="btn btn-primary">블로그 보기</a>
+                    <a href="board.html" class="btn btn-secondary">게시판 보기</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">주요 기능</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>게시판</h3>
+                    <p>자유롭게 의견을 나누고 질문할 수 있는 커뮤니티 게시판</p>
+                    <a href="board.html" class="feature-link">바로가기 →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>블로그</h3>
+                    <p>심도 있는 기술 아티클과 개발 경험을 공유하는 블로그</p>
+                    <a href="blog.html" class="feature-link">바로가기 →</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>지식 공유</h3>
+                    <p>개발자들의 노하우와 베스트 프랙티스를 함께 나눕니다</p>
+                    <a href="#" class="feature-link">더 알아보기 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recent-posts">
+        <div class="container">
+            <h2 class="section-title">최근 게시글</h2>
+            <div class="posts-grid">
+                <article class="post-preview">
+                    <div class="post-meta">
+                        <span class="post-category">Kubernetes</span>
+                        <span class="post-date">2025-11-26</span>
+                    </div>
+                    <h3>ArgoCD를 이용한 GitOps 구현하기</h3>
+                    <p>Kubernetes 환경에서 ArgoCD를 활용하여 선언적 배포를 구현하는 방법을 소개합니다.</p>
+                    <a href="post.html" class="read-more">자세히 보기 →</a>
+                </article>
+                <article class="post-preview">
+                    <div class="post-meta">
+                        <span class="post-category">DevOps</span>
+                        <span class="post-date">2025-11-25</span>
+                    </div>
+                    <h3>Kustomize로 환경별 설정 관리하기</h3>
+                    <p>Dev, Staging, Production 환경에 따라 다른 설정을 효율적으로 관리하는 방법</p>
+                    <a href="post.html" class="read-more">자세히 보기 →</a>
+                </article>
+                <article class="post-preview">
+                    <div class="post-meta">
+                        <span class="post-category">Frontend</span>
+                        <span class="post-date">2025-11-24</span>
+                    </div>
+                    <h3>모던 CSS로 반응형 레이아웃 만들기</h3>
+                    <p>CSS Grid와 Flexbox를 활용하여 깔끔하고 반응형인 웹 디자인을 구현하는 팁</p>
+                    <a href="post.html" class="read-more">자세히 보기 →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tech Hub. Deployed with ArgoCD on Kubernetes.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

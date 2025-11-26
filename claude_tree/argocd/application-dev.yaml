@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blog-board-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/YOUR_ORG/YOUR_REPO  # 실제 GitHub 저장소 URL로 변경하세요
+    targetRevision: HEAD
+    path: k8s/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blog-app-dev
+
+  syncPolicy:
+    automated:
+      prune: true        # 삭제된 리소스 자동 정리
+      selfHeal: true     # 클러스터 변경사항 자동 복구
+      allowEmpty: false  # 빈 매니페스트 허용 안함
+
+    syncOptions:
+      - CreateNamespace=true  # 네임스페이스 자동 생성
+      - PruneLast=true        # 동기화 마지막에 리소스 정리
+
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+  revisionHistoryLimit: 10

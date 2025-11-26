@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: nginx   # <- 여기서 ns 한 번에 세팅 (괜찮음)
+
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: nginx:kustomize.config.k8s.io/Kustomization:nginx/
+
+configMapGenerator:
+  - files:
+      - index.html=./html/index.html
+    name: nginx
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - nginx-deploy.yaml
+  - nginx-svc.yaml   # 서비스도 같이 쓰고 싶으면 추가
+
+# patches는 일단 제거 (필요하면 나중에 따로)
+# patches: []
