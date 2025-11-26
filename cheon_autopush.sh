@@ -1,6 +1,14 @@
 #!/bin/bash
 time=$(date '+%Y%m%d%H%M')
-branch=$(git branch | gawk '{print $2}')
+#branch=$(git branch | gawk '{print $2}')
+branch=$(git branch --show-current)
+[ -z "$branch" ] && branch="main"
+
+# 첫 번째 push에서 브랜치 없을 수도 있으니 기본값 main 세팅
+if [ -z "$branch" ]; then
+    branch="main"
+fi
+
 remote=$( git remote -v | grep push | gawk '{print $1}' )
 git add .
 
