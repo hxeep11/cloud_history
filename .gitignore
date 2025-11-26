@@ -1,0 +1,31 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets (절대 커밋하지 마세요!)
+*.key
+*.pem
+*.crt
+secrets/
+.env
+.env.local
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# Kubernetes
+kubeconfig
+*.kubeconfig
+
+# Temporary files
+*.tmp
+temp/
