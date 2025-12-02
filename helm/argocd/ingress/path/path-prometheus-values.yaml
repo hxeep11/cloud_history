@@ -1,32 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: monitoring-metrics-ingress
+  name: monitoring-prometheus-ingress
   namespace: monitoring
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
-    - host: apps.168.107.11.85.nip.io
+    - host: prometheus.168.107.11.85.nip.io
       http:
         paths:
-          # /prometheus, /prometheus/, /prometheus/graph → /, /graph
-          - path: /prometheus(/|$)(.*)
-            pathType: ImplementationSpecific      # 🔴 여기!
+          - path: /
+            pathType: Prefix
             backend:
               service:
-                name: prometheus-kube-prometheus-prometheus           # 실제 Prometheus 서비스
+                name: prometheus-kube-prometheus-prometheus
                 port:
-                  number: 9090                      # 서비스 port (kubectl get svc로 확인한 값)
-
-          # /alertmanager, /alertmanager/, /alertmanager/#/alerts → /, /#/alerts
-          - path: /alertmanager(/|$)(.*)
-            pathType: ImplementationSpecific      # 🔴 여기!
-            backend:
-              service:
-                name: prometheus-kube-prometheus-alertmanager     # 실제 Alertmanager 서비스
-                port:
-                  number: 9093                      # 서비스 port
+                  number: 9090
