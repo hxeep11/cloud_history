@@ -1,0 +1,14 @@
+# helm get values argocd -n argocd argo/argo-cd -o yaml > argocd-values.yaml
+USER-SUPPLIED VALUES:
+USER-SUPPLIED VALUES: null
+server:
+  service:
+    type: LoadBalancer
+    servicePortHttp: 32080
+    servicePortHttps: 32443
+    annotations:
+      oci.oraclecloud.com/reserved-ips: 168.107.42.90
+      service.beta.kubernetes.io/oci-load-balancer-shape: flexible
+      service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: 10
+      service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: 10
+      oci.oraclecloud.com/load-balancer-subnets: ocid1.subnet.oc1.ap-chuncheon-1.aaaaaaaad2ny234hbqfwgqyu7cc7lw2gtzudkyfuuqsixtihwsohsccaomia

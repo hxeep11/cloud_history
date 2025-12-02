@@ -1,0 +1,43 @@
+# helm get values argocd -n argocd argo/argo-cd -o yaml > argocd-values.yaml
+USER-SUPPLIED VALUES:
+USER-SUPPLIED VALUES: null
+server:
+  # argocd-values.yaml (override용)
+
+global:
+  # Ingress에서 사용할 도메인
+  # 예: nip.io 사용해서 IP 기반 도메인
+  domain: argocd.168.107.11.85.nip.io
+
+configs:
+  params:
+    # Ingress에서 TLS 종료할 거면 true (ArgoCD 서버는 HTTP로 통신)
+    server.insecure: true
+
+server:
+  # 더 이상 LB 안 씀 → 클러스터 내부용 서비스면 충분
+  service:
+    type: ClusterIP
+
+  ingress:
+    enabled: true
+
+    # nginx-ingress 컨트롤러 사용
+    ingressClassName: nginx
+    # 옛 방식 annotation도 함께 써두면 호환성 ↑
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      # cert-manager 쓴다면 여기 ClusterIssuer 추가
+      # cert-manager.io/cluster-issuer: letsencrypt-prod
+
+    # v6+ chart 기준: hostname 또는 global.domain 사용
+    # chart 버전에 따라 hostname이 없으면 global.domain을 자동으로 사용
+    hostname: argocd.168.107.11.85.nip.io
+
+    # TLS 쓰고 싶을 때 (cert-manager, 자체 인증서 등)
+    extraTls:
+      - hosts:
+          - argocd.168.107.11.85.nip.io
+        secretName: argocd-tls

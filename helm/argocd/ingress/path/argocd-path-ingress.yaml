@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-path-ingress
+  namespace: argocd
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # ⚠ rewrite-target 설정은 넣지 말 것 (/argocd 서브패스라서 꼬입니다)
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: apps.168.107.11.85.nip.io       # 에러 메시지에 나왔던 host 그대로 사용
+      http:
+        paths:
+          - path: /argocd
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server         # 지금 svc 이름
+                port:
+                  number: 80                # 위에서 본 service port
+  # TLS 쓰고 있으면 아래 블록 추가 (secretName은 환경에 맞게)
+  # tls:
+  #   - hosts:
+  #       - apps.168.107.11.85.nip.io
+  #     secretName: argocd-tls

@@ -1,0 +1,5 @@
+configs:
+  params:
+    server.insecure: true          # 기존 값 유지
+    server.basehref: /argocd       # UI 정적 리소스 경로
+    server.rootpath: /argocd       # API/UI 공통 root path
