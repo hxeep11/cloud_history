@@ -911,12 +911,12 @@
     async function updateGoldPrice() {
       try {
         // 실제 연동 시 이 부분 사용
-        // const price = await fetchGoldPriceReal();
+        const price = await fetchGoldPriceReal();
 
         // 데모용: 임의 시세 생성 (약 3,000,000 ~ 3,200,000 사이)
-        const randomBase = 3000000;
-        const randomDiff = Math.floor(Math.random() * 200000);
-        const price = randomBase + randomDiff;
+        // const randomBase = 3000000;
+        // const randomDiff = Math.floor(Math.random() * 200000);
+        // const price = randomBase + randomDiff;
 
         const formatted = price.toLocaleString("ko-KR");
         goldPriceEl.textContent = formatted;
