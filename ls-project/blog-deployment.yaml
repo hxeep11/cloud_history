@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: blog-service
-  namespace: blogging-system
+  namespace: ls-blogging-system
   labels:
     app: blog-service
 spec:
@@ -26,4 +26,4 @@ spec:
       volumes:
         - name: blog-html
           configMap:
-            name: sl-project-blog-html   # kustomize로 생성한 ConfigMap 이름
+            name: ls-project-blog-html   # kustomize로 생성한 ConfigMap 이름

@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/hxeep11/cloud_history/sl-project   # TODO
+    repoURL: https://github.com/hxeep11/cloud_history/ls-project   # TODO
     targetRevision: main                                # TODO
     path: k8s
   destination:

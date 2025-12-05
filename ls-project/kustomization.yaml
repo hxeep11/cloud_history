@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: blogging-system
+namespace: ls-blogging-system
 
 resources:
   - namespace.yaml
@@ -16,11 +16,11 @@ resources:
 
 labels:
   - pairs:
-      app.kubernetes.io/part-of: sl-project
+      app.kubernetes.io/part-of: ls-project
 
 # ✅ HTML 파일들을 ConfigMap으로 생성
 configMapGenerator:
-  - name: sl-project-blog-html
+  - name: ls-project-blog-html
     files:
       - html/index.html
       - html/subscribe.html
