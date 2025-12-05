@@ -4,15 +4,15 @@ kind: Kustomization
 namespace: ls-blogging-system
 
 resources:
-  - namespace.yaml
-  - postgres-statefulset.yaml
-  - postgres-service.yaml
+  - la-namespace.yaml
+  - ls-postgres-statefulset.yaml
+  - ls-postgres-service.yaml
   - ls-blog-deployment.yaml
   - ls-blog-service.yaml
-  - subscriber-deployment.yaml
-  - subscriber-service.yaml
-  - notifier-deployment.yaml
-  - ingress.yaml
+  - ls-subscriber-deployment.yaml
+  - ls-subscriber-service.yaml
+  - ls-notifier-deployment.yaml
+  - ls-ingress.yaml
 
 labels:
   - pairs:
@@ -22,8 +22,8 @@ labels:
 configMapGenerator:
   - name: ls-project-blog-html
     files:
-      - html/index.html
-      - html/subscribe.html
+      - html/ls-index.html
+      - html/ls-subscribe.html
 
 generatorOptions:
   disableNameSuffixHash: true

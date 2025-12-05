@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: notifier-service
+  name: ls-notifier-service
   namespace: ls-blogging-system
   labels:
-    app: notifier-service
+    app: ls-notifier-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: notifier-service
+      app: ls-notifier-service
   template:
     metadata:
       labels:
-        app: notifier-service
+        app: ls-notifier-service
     spec:
       containers:
-        - name: notifier-service
+        - name: ls-notifier-service
           image: your-registry/sl-project-notifier:latest
           imagePullPolicy: IfNotPresent
           env:
             # === DB 연결 (원하면 DB도 직접 조회) ===
             - name: DB_HOST
-              value: sl-project-postgres
+              value: ls-project-postgres
             - name: DB_PORT
               value: "5432"
             - name: DB_NAME

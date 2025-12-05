@@ -10,7 +10,7 @@ spec:
     - host: ls-project.apps.168.107.11.85.nip.io
       http:
         paths:
-          - path: /
+          - path: /posts
             pathType: Prefix
             backend:
               service:

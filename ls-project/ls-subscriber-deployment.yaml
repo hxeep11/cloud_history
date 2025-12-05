@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: subscriber-service          # 또는 subscribe-service
+  name: ls-subscriber-service          # 또는 subscribe-service
   namespace: ls-blogging-system
   labels:
-    app: subscriber-service         # 위 name과 맞춰주기
+    app: ls-subscriber-service         # 위 name과 맞춰주기
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: subscriber-service
+      app: ls-subscriber-service
   template:
     metadata:
       labels:
-        app: subscriber-service
+        app: ls-subscriber-service
     spec:
       containers:
-        - name: subscriber-service
+        - name: ls-subscriber-service
           image: nginx:1.27-alpine          # ✅ nginx 이미지로 교체
           imagePullPolicy: IfNotPresent
           ports:
