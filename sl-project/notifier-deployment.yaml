@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifier-service
+  labels:
+    app: notifier-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifier-service
+  template:
+    metadata:
+      labels:
+        app: notifier-service
+    spec:
+      containers:
+        - name: notifier-service
+          image: your-registry/notifier-service:latest  # TODO: 실제 이미지로 변경
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_HOST
+              value: postgres
+            - name: DB_NAME
+              value: blog_db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+
+            # SMTP 관련 환경변수
+            - name: SMTP_HOST
+              value: smtp.example.com   # TODO
+            - name: SMTP_PORT
+              value: "587"
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: username
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: password
+          # notifier는 내부에서 주기적으로 작업 돌도록 구현
+          # (ex. 30초마다 DB/큐 체크)

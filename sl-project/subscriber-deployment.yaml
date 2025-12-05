@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subscriber-service
+  labels:
+    app: subscriber-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subscriber-service
+  template:
+    metadata:
+      labels:
+        app: subscriber-service
+    spec:
+      containers:
+        - name: subscriber-service
+          image: your-registry/subscriber-service:latest  # TODO: 실제 이미지로 변경
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: postgres
+            - name: DB_NAME
+              value: blog_db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  annotations:
+    # 사용 중인 ingress controller에 맞게 수정 (예: nginx)
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: blog.example.com   # TODO: 실제 도메인으로 변경
+      http:
+        paths:
+          - path: /posts
+            pathType: Prefix
+            backend:
+              service:
+                name: blog-service
+                port:
+                  number: 80
+          - path: /subscribe
+            pathType: Prefix
+            backend:
+              service:
+                name: subscriber-service
+                port:
+                  number: 80
