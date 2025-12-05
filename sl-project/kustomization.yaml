@@ -1,11 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# 이 네임스페이스 안에 전부 배포
 namespace: blogging-system
 
 resources:
   - namespace.yaml
+
+  # DB 관련
+  - db-secret.yaml
+  - postgres-statefulset.yaml
+  - postgres-service.yaml
+
+  # 앱 관련
   - blog-deployment.yaml
   - blog-service.yaml
   - subscriber-deployment.yaml
@@ -14,4 +20,4 @@ resources:
   - ingress.yaml
 
 commonLabels:
-  app.kubernetes.io/part-of: blog-email-system
+  app.kubernetes.io/part-of: sl-project
