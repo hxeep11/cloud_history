@@ -18,6 +18,7 @@ resources:
   - subscriber-service.yaml
   - notifier-deployment.yaml
   - ingress.yaml
+  - notifier-service.yaml
 
 commonLabels:
   app.kubernetes.io/part-of: sl-project
