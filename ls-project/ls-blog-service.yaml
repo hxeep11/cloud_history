@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: blog-service
-  namespace: blogging-system
+  name: ls-blog-service
+  namespace: ls-blogging-system
   labels:
-    app: blog-service
+    app: ls-blog-service
 spec:
   type: ClusterIP
   selector:
-    app: blog-service
+    app: ls-blog-service       # ⬅️ Deployment template.labels와 동일
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 80        # ⬅️ containerPort와 동일
       protocol: TCP

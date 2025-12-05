@@ -4,7 +4,7 @@ metadata:
   name: ls-blog-service
   namespace: ls-blogging-system
   labels:
-    app: blog-service
+    app: ls-blog-service
 spec:
   replicas: 1
   selector:
@@ -16,14 +16,20 @@ spec:
         app: ls-blog-service
     spec:
       containers:
-        - name: nginx
-          image: nginx:1.27-alpine
+        - name: ls-blog-service
+          image: nginx:1.27-alpine       # nginx 이미지
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: ls-blog-html
-              mountPath: /usr/share/nginx/html
-      volumes:
-        - name: ls-blog-html
-          configMap:
-            name: ls-project-blog-html   # kustomize로 생성한 ConfigMap 이름
+            - containerPort: 80          # nginx 기본 포트
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 20
