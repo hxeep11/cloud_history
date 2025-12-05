@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: ls-blogging-system
 
 resources:
-  - la-namespace.yaml
+  - ls-namespace.yaml
   - ls-postgres-statefulset.yaml
   - ls-postgres-service.yaml
   - ls-blog-deployment.yaml
