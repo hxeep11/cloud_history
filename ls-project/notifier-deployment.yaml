@@ -56,7 +56,7 @@ spec:
                   key: password
 
             - name: MAIL_FROM
-              value: "no-reply@sl-project.local"
+              value: "no-reply@ls-project.local"
 
             # ✅ subscriber-service를 "Ingress 도메인"으로 호출
             - name: SUBSCRIBER_BASE_URL
