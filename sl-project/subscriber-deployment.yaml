@@ -16,13 +16,17 @@ spec:
     spec:
       containers:
         - name: subscriber-service
-          image: your-registry/subscriber-service:latest  # TODO: 실제 이미지로 변경
+          # ✅ 이메일 저장 + SMTP 발송 로직이 들어있는 앱 이미지
+          image: your-registry/sl-project-subscriber:latest  # TODO: 실제 레지스트리로 변경
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 3000
+            - containerPort: 3000  # 예: HTTP API 포트 (/subscribe, /send-email 등)
           env:
+            # === DB 연결 정보 (구독자 이메일 저장용) ===
             - name: DB_HOST
-              value: postgres
+              value: postgres          # 같은 네임스페이스의 DB 서비스 이름 가정
+            - name: DB_PORT
+              value: "5432"
             - name: DB_NAME
               value: blog_db
             - name: DB_USER
@@ -35,6 +39,31 @@ spec:
                 secretKeyRef:
                   name: db-credentials
                   key: password
+
+            # === SMTP 설정 (단순 메일 발송용) ===
+            - name: SMTP_HOST
+              value: smtp.example.com   # TODO: 실제 SMTP 호스트로 변경
+            - name: SMTP_PORT
+              value: "587"              # TLS 포트 예시
+            - name: SMTP_USE_TLS
+              value: "true"
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: username
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: password
+
+            # === 메일 기본 설정 (From, 제목 등) ===
+            - name: MAIL_FROM
+              value: "no-reply@sl-project.local"  # TODO
+            - name: MAIL_SUBJECT_NEW_POST
+              value: "[sl-project] 새 글이 등록되었습니다."
+
           readinessProbe:
             httpGet:
               path: /health
