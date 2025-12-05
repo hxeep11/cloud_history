@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: blogging-system
+
+resources:
+  - namespace.yaml
+  - postgres-statefulset.yaml
+  - postgres-service.yaml
+  - blog-deployment.yaml
+  - blog-service.yaml
+  - subscriber-deployment.yaml
+  - subscriber-service.yaml
+  - notifier-deployment.yaml
+  - ingress.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: sl-project
+
+# ✅ HTML 파일들을 ConfigMap으로 생성
+configMapGenerator:
+  - name: sl-project-blog-html
+    files:
+      - html/index.html
+      - html/subscribe.html
+
+generatorOptions:
+  disableNameSuffixHash: true

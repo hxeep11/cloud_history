@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifier-service
+  namespace: blogging-system
+  labels:
+    app: notifier-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifier-service
+  template:
+    metadata:
+      labels:
+        app: notifier-service
+    spec:
+      containers:
+        - name: notifier-service
+          image: your-registry/sl-project-notifier:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            # === DB 연결 (원하면 DB도 직접 조회) ===
+            - name: DB_HOST
+              value: sl-project-postgres
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: sl_project_db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: password
+
+            # === SMTP 설정 ===
+            - name: SMTP_HOST
+              value: smtp.example.com   # TODO
+            - name: SMTP_PORT
+              value: "587"
+            - name: SMTP_USE_TLS
+              value: "true"
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: smtp-credentials
+                  key: username
+            - name: SMTP_PASSWORD
+              valueFrom:
+                  name: smtp-credentials
+                  key: password
+
+            - name: MAIL_FROM
+              value: "no-reply@sl-project.local"
+
+            # ✅ subscriber-service를 "Ingress 도메인"으로 호출
+            - name: SUBSCRIBER_BASE_URL
+              value: "http://sl-project.apps.168.107.11.85.nip.io"
+
+          # notifier는 내부 배치/워커 느낌으로 동작 (API가 있다면 probes 추가 가능)

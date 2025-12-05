@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blog-email-system
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/hxeep11/cloud_history/sl-project   # TODO
+    targetRevision: main                                # TODO
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: blogging-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
