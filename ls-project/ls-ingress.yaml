@@ -10,17 +10,17 @@ spec:
     - host: ls-project.apps.168.107.11.85.nip.io
       http:
         paths:
-          - path: /posts
+          - path: /ls-posts
             pathType: Prefix
             backend:
               service:
                 name: ls-blog-service
                 port:
                   number: 80
-          - path: /subscribe
+          - path: /ls-subscribe
             pathType: Prefix
             backend:
               service:
-                name: subscriber-service
+                name: ls-subscriber-service
                 port:
                   number: 80
