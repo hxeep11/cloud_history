@@ -11,7 +11,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: blogging-system
+    namespace: ls-blogging-system
   syncPolicy:
     automated:
       prune: true
