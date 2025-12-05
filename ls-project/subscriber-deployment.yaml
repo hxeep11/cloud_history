@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: subscriber-service
-  namespace: blogging-system
+  namespace: ls-blogging-system
   labels:
     app: subscriber-service
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: subscriber-service
-          image: your-registry/sl-project-subscriber:latest
+          image: your-registry/ls-project-subscriber:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

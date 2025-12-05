@@ -7,8 +7,8 @@ resources:
   - namespace.yaml
   - postgres-statefulset.yaml
   - postgres-service.yaml
-  - blog-deployment.yaml
-  - blog-service.yaml
+  - ls-blog-deployment.yaml
+  - ls-blog-service.yaml
   - subscriber-deployment.yaml
   - subscriber-service.yaml
   - notifier-deployment.yaml

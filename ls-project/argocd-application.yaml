@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: blog-email-system
+  name: ls-blog-email-system
   namespace: argocd
 spec:
   project: default

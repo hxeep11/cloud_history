@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: sl-project-postgres
-  namespace: blogging-system
+  name: ls-project-postgres
+  namespace: ls-blogging-system
   labels:
-    app: sl-project-postgres
+    app: ls-project-postgres
 spec:
-  serviceName: sl-project-postgres
+  serviceName: ls-project-postgres
   replicas: 1
   selector:
     matchLabels:
-      app: sl-project-postgres
+      app: ls-project-postgres
   template:
     metadata:
       labels:
-        app: sl-project-postgres
+        app: ls-project-postgres
     spec:
       containers:
         - name: postgres

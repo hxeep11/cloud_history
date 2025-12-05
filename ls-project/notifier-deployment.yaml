@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: notifier-service
-  namespace: blogging-system
+  namespace: ls-blogging-system
   labels:
     app: notifier-service
 spec:
@@ -60,6 +60,6 @@ spec:
 
             # ✅ subscriber-service를 "Ingress 도메인"으로 호출
             - name: SUBSCRIBER_BASE_URL
-              value: "http://sl-project.apps.168.107.11.85.nip.io"
+              value: "http://ls-project.apps.168.107.11.85.nip.io"
 
           # notifier는 내부 배치/워커 느낌으로 동작 (API가 있다면 probes 추가 가능)
