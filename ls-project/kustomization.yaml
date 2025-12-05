@@ -11,7 +11,7 @@ resources:
   - ls-blog-service.yaml
   - ls-subscriber-deployment.yaml
   - ls-subscriber-service.yaml
-  - ls-notifier-deployment.yaml
+  # - ls-notifier-deployment.yaml
   - ls-ingress.yaml
 
 labels:
