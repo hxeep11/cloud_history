@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: subscriber-service
+  name: subscriber-service          # 또는 subscribe-service
   namespace: ls-blogging-system
   labels:
     app: subscriber-service
@@ -11,5 +11,5 @@ spec:
     app: subscriber-service
   ports:
     - port: 80
-      targetPort: 3000
+      targetPort: 80               # ✅ nginx 컨테이너 포트랑 맞춤
       protocol: TCP
