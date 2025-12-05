@@ -17,19 +17,18 @@ spec:
     spec:
       containers:
         - name: ls-blog-service
-          image: nginx:1.27-alpine       # nginx 이미지
+          image: nginx:1.27-alpine
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80          # nginx 기본 포트
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 3
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 10
-            periodSeconds: 20
+            - containerPort: 80
+
+          # ✅ 여기서부터 중요 (HTML 마운트)
+          volumeMounts:
+            - name: blog-html
+              mountPath: /usr/share/nginx/html     # ✅ nginx 기본 루트
+              readOnly: true
+
+      volumes:
+        - name: blog-html
+          configMap:
+            name: ls-project-blog-html    # ✅ kustomize에서 만든 ConfigMap 이름
