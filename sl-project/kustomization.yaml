@@ -15,7 +15,6 @@ resources:
   - blog-deployment.yaml
   - blog-service.yaml
   - subscriber-deployment.yaml
-  - subscriber-service.yaml
   - notifier-deployment.yaml
   - ingress.yaml
   - notifier-service.yaml

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: ls-notifier-service
-          image: your-registry/sl-project-notifier:latest
+          image: your-registry/-project-notifier:latest
           imagePullPolicy: IfNotPresent
           env:
             # === DB 연결 (원하면 DB도 직접 조회) ===
