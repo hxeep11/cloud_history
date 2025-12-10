@@ -20,6 +20,14 @@ echo "IPTables: Allowed outbound TCP 80."
 /sbin/iptables -A OUTPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
 echo "IPTables: Allowed outbound TCP 443."
 
+/sbin/iptable -A OUTPUT -p tcp --dport 587 -j ACCEPT
+/sbin/iptable -A INPUT  -p tcp --sport 587 -j ACCEPT
+
+/sbin/iptable -A OUTPUT -p tcp --dport 25 -j ACCEPT
+/sbin/iptable -A INPUT  -p tcp --sport 25 -j ACCEPT
+
+sudo systemctl restart postfix
+
 # 3. 이미 수립된 연결 및 관련 연결 허용 (필수)
 /sbin/iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
