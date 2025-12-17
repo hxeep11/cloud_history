@@ -1,0 +1,125 @@
+﻿**********************
+Windows PowerShell 기록 시작
+시작 시간: 20231013230752
+사용자 이름: DESKTOP-FQTF52S\Kim
+RunAs 사용자: DESKTOP-FQTF52S\Kim
+구성 이름: 
+Machine: DESKTOP-FQTF52S (Microsoft Windows NT 10.0.22621.0)
+호스트 응용 프로그램: C:\WINDOWS\system32\WindowsPowerShell\v1.0\PowerShell_ISE.exe
+프로세스 ID: 20716
+PSVersion: 5.1.22621.1778
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.1778
+BuildVersion: 10.0.22621.1778
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+기록이 시작되었습니다. 출력 파일은 c:\users\kim\desktop\docs\log\batch_230713.txt입니다.
+Error occurred: 'msgbox' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오..Exception.Message
+"1"개의 인수가 있는 "ReleaseComObject"을(를) 호출하는 동안 예외가 발생했습니다. "개체 참조가 개체의 인스턴스로 설정되지 않았습니다."
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:255 문자:5
++     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($prese ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : NullReferenceException
+"1"개의 인수가 있는 "ReleaseComObject"을(를) 호출하는 동안 예외가 발생했습니다. "개체 참조가 개체의 인스턴스로 설정되지 않았습니다."
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:255 문자:5
++     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($prese ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : NullReferenceException
+
+"1"개의 인수가 있는 "ReleaseComObject"을(를) 호출하는 동안 예외가 발생했습니다. "개체 참조가 개체의 인스턴스로 설정되지 않았습니다."
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:256 문자:5
++     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($power ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : NullReferenceException
+"1"개의 인수가 있는 "ReleaseComObject"을(를) 호출하는 동안 예외가 발생했습니다. "개체 참조가 개체의 인스턴스로 설정되지 않았습니다."
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:256 문자:5
++     [System.Runtime.Interopservices.Marshal]::ReleaseComObject($power ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : NullReferenceException
+
+Slides.Add : Invalid enumeration value.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:327 문자:1
++ $slide = $presentation.slides.add(1,$blanklayout)
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (:) [], ArgumentException
+    + FullyQualifiedErrorId : System.ArgumentException
+Slides.Add : Invalid enumeration value.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:327 문자:1
++ $slide = $presentation.slides.add(1,$blanklayout)
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (:) [], ArgumentException
+    + FullyQualifiedErrorId : System.ArgumentException
+
+Presentation.SaveAs : Invalid request.  이 버전의 PowerPoint에서는 PowerPoint 3, 4 또는 95 파일로의 저장이 지원되지 않습니다.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:334 문자:1
++ $presentation.SaveAs([ref] $newFilePath, 2) # 2는 .pptm 확장자를 나타냅니다
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (:) [], COMException
+    + FullyQualifiedErrorId : System.Runtime.InteropServices.COMException
+Presentation.SaveAs : Invalid request.  이 버전의 PowerPoint에서는 PowerPoint 3, 4 또는 95 파일로의 저장이 지원되지 않습니다.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:334 문자:1
++ $presentation.SaveAs([ref] $newFilePath, 2) # 2는 .pptm 확장자를 나타냅니다
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (:) [], COMException
+    + FullyQualifiedErrorId : System.Runtime.InteropServices.COMException
+
+catch : 'catch' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하
+십시오.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:339 문자:1
++ catch {
++ ~~~~~
+    + CategoryInfo          : ObjectNotFound: (catch:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+catch : 'catch' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:339 문자:1
++ catch {
++ ~~~~~
+    + CategoryInfo          : ObjectNotFound: (catch:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+finally : 'finally' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시
+ 시도하십시오.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:342 문자:1
++ finally {
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (finally:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+finally : 'finally' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다. 이름이 정확한지 확인하고 경로가 포함된 경우 경로가 올바른지 검증한 다음 다시 시도하십시오
+.
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:342 문자:1
++ finally {
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (finally:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+"DisplayAlerts"을(를) 설정하는 동안 예외가 발생했습니다. "값 "False"을(를) "Microsoft.Office.Interop.Word.WdAlertLevel" 유형으로 변환할 수 없습니다. 오류:
+ "'System.Boolean'에서 'Microsoft.Office.Interop.Word.WdAlertLevel'(으)로의 캐스팅이 잘못되었습니다.""
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:490 문자:1
++ $word.DisplayAlerts = $false # 경고 메시지 표시 안 함
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+"DisplayAlerts"을(를) 설정하는 동안 예외가 발생했습니다. "값 "False"을(를) "Microsoft.Office.Interop.Word.WdAlertLevel" 유형으로 변환할 수 없습니다. 오류: "'Syst
+em.Boolean'에서 'Microsoft.Office.Interop.Word.WdAlertLevel'(으)로의 캐스팅이 잘못되었습니다.""
+위치 C:\Users\Kim\Desktop\제목 없음2.ps1:490 문자:1
++ $word.DisplayAlerts = $false # 경고 메시지 표시 안 함
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], SetValueInvocationException
+    + FullyQualifiedErrorId : ExceptionWhenSetting
+
+
+Application : Microsoft.Office.Interop.Word.ApplicationClass
+Creator     : 1297307460
+
+Error occurred: 파일을 찾을 수 없습니다. 파일이 이동 또는 삭제되었거나 이름이 변경되었는지 확인하세요. (c:\users\kim\desktop\docs\basic.docx).Exception.Message
+**********************
+Windows PowerShell 기록 끝
+종료 시간: 20231013230821
+**********************
