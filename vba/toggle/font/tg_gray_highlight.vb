@@ -1,4 +1,4 @@
-Sub tg-gray-highlight()
+Sub tg_gray_highlight()
 
 If selection.Interior.Color = vbWhite Then
 Selection.Interior.Color = RGB(220,220,220)
